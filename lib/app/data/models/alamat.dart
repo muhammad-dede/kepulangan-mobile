@@ -15,7 +15,9 @@ class Alamat {
     id = int.parse(json['id'].toString());
     judul = json['judul'];
     lokasi = json['lokasi'];
-    utama = json['utama'] == true || json['utama'] == 1 ? 1 : 0;
+    utama = json['utama'] == null || json['utama'] == 0 || json['utama'] == "0"
+        ? 0
+        : 1;
   }
 
   Map<String, dynamic> toJson() {

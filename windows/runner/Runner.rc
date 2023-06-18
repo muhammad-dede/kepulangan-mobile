@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.koscode.kepulangan" "\0"
-            VALUE "FileDescription", "kepulangan" "\0"
+            VALUE "FileDescription", "Kepulangan" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "kepulangan" "\0"
+            VALUE "InternalName", "Kepulangan" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.koscode.kepulangan. All rights reserved." "\0"
             VALUE "OriginalFilename", "kepulangan.exe" "\0"
-            VALUE "ProductName", "kepulangan" "\0"
+            VALUE "ProductName", "Kepulangan" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
