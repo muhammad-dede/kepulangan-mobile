@@ -143,9 +143,9 @@ class LaporanController extends GetxController {
           arguments: {
             "title": jenisLaporanController.text,
             "stream_url":
-                "$url?id_group=$idGroup&start_date=$startDate&end_date=$endDate&download=false",
+                "$url?id_user=${AuthService.to.auth.value.id}&id_group=$idGroup&start_date=$startDate&end_date=$endDate&download=false",
             "download_url":
-                "$url?id_group=$idGroup&start_date=$startDate&end_date=$endDate&download=true"
+                "$url?id_user=${AuthService.to.auth.value.id}&id_group=$idGroup&start_date=$startDate&end_date=$endDate&download=true"
           },
         );
       } else {
