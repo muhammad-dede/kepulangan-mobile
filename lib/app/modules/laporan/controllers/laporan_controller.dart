@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:kepulangan/app/data/models/group.dart';
 import 'package:kepulangan/app/routes/app_pages.dart';
 import 'package:kepulangan/app/services/auth_service.dart';
@@ -143,16 +144,17 @@ class LaporanController extends GetxController {
           arguments: {
             "title": jenisLaporanController.text,
             "stream_url":
-                "$url?id_user=${AuthService.to.auth.value.id}&id_group=$idGroup&start_date=$startDate&end_date=$endDate&download=false",
+                "$url?id_user=${AuthService.to.auth.value.id}&id_group=$idGroup&start_date=${DateFormat('yyyy-MM-dd').format(startDate!)}&end_date=${DateFormat('yyyy-MM-dd').format(endDate!)}&download=false",
             "download_url":
-                "$url?id_user=${AuthService.to.auth.value.id}&id_group=$idGroup&start_date=$startDate&end_date=$endDate&download=true"
+                "$url?id_user=${AuthService.to.auth.value.id}&id_group=$idGroup&start_date=${DateFormat('yyyy-MM-dd').format(startDate!)}&end_date=${DateFormat('yyyy-MM-dd').format(endDate!)}&download=true"
           },
         );
       } else {
         try {
           EasyLoading.show(
               status: 'loading...', maskType: EasyLoadingMaskType.black);
-          await downloadExcel("$url?start_date=$startDate&end_date=$endDate");
+          await downloadExcel(
+              "$url?start_date=${DateFormat('yyyy-MM-dd').format(startDate!)}&end_date=${DateFormat('yyyy-MM-dd').format(endDate!)}");
         } finally {
           EasyLoading.dismiss();
         }
