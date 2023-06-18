@@ -1,0 +1,98 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
+import 'package:kepulangan/app/data/models/bast_pihak_lain.dart';
+import 'package:kepulangan/app/modules/main/controllers/main_controller.dart';
+import 'package:kepulangan/app/services/auth_service.dart';
+import 'package:kepulangan/app/services/base_client.dart';
+
+class DetailBastPihakLainController extends GetxController
+    with GetSingleTickerProviderStateMixin {
+  static DetailBastPihakLainController get to => Get.find();
+
+  late TabController tabController;
+  final bastPihakLain = BastPihakLain().obs;
+
+  @override
+  void onInit() {
+    bastPihakLain.value = Get.arguments;
+    tabController = TabController(length: 2, vsync: this);
+    super.onInit();
+  }
+
+  @override
+  void onClose() {
+    tabController.dispose();
+    super.onClose();
+  }
+
+  bool isAnyEmpty() {
+    return bastPihakLain.value.fotoPihakKedua == null ||
+            bastPihakLain.value.fotoSerahTerima == null ||
+            bastPihakLain.value.jemputPihakLain!.isEmpty
+        ? true
+        : false;
+  }
+
+  bool isCanTerlaksana() {
+    return isAnyEmpty() == false && bastPihakLain.value.terlaksana == 0
+        ? true
+        : false;
+  }
+
+  bool isCanExport() {
+    return bastPihakLain.value.terlaksana == 1 ? true : false;
+  }
+
+  bool isCanEdit() {
+    return bastPihakLain.value.terlaksana == 0 || AuthService.to.isAdmin.isTrue
+        ? true
+        : false;
+  }
+
+  bool isCanDelete() {
+    return bastPihakLain.value.terlaksana == 0 || AuthService.to.isAdmin.isTrue
+        ? true
+        : false;
+  }
+
+  Future<void> terlaksana() async {
+    try {
+      EasyLoading.show(
+          status: 'loading...', maskType: EasyLoadingMaskType.black);
+      final response = await BaseClient()
+          .post("/api/bast-pihak-lain/terlaksana/${bastPihakLain.value.id}", {
+        'terlaksana': 1,
+      });
+      response.fold((l) {
+        EasyLoading.showError(l.toString());
+      }, (r) async {
+        bastPihakLain.value = BastPihakLain.fromJson(r['data']);
+        MainController.to.generateRefreshKey(10);
+        EasyLoading.showSuccess(
+            "${bastPihakLain.value.pihakKedua?.nama ?? "Pihak Lain"} berhasil terlaksana");
+      });
+    } finally {
+      EasyLoading.dismiss();
+    }
+  }
+
+  Future<void> destroy() async {
+    try {
+      EasyLoading.show(
+          status: 'loading...', maskType: EasyLoadingMaskType.black);
+      final response = await BaseClient()
+          .delete("/api/bast-pihak-lain/destroy/${bastPihakLain.value.id}");
+      response.fold((l) {
+        EasyLoading.showError(l.toString());
+      }, (r) async {
+        MainController.to.generateRefreshKey(10);
+        EasyLoading.showSuccess(
+            "${bastPihakLain.value.pihakKedua?.nama ?? "Pihak Lain"} berhasil dihapus");
+        Get.back();
+      });
+    } finally {
+      EasyLoading.dismiss();
+    }
+  }
+}
