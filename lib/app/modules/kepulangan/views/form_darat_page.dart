@@ -5,10 +5,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:kepulangan/app/data/models/bast_darat.dart';
 import 'package:kepulangan/app/routes/app_pages.dart';
+import 'package:kepulangan/app/services/permission_service.dart';
 import 'package:kepulangan/app/widgets/list_detail_widget.dart';
 import 'package:kepulangan/app/widgets/text_form_field_widget.dart';
 import 'package:kepulangan/app/widgets/image_picker_widget.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import '../controllers/kepulangan_controller.dart';
 
@@ -167,29 +167,19 @@ class InputFotoBast extends GetView<KepulanganController> {
             controller.update();
           },
           onTapCamera: () async {
-            var status = await Permission.camera.status;
-            if (status.isDenied) {
-              if (await Permission.camera.request().isGranted) {
+            await PermissionService.to.cameraRequest().then((value) {
+              if (value == true) {
                 controller.getFotoBast(ImageSource.camera);
-              } else {
-                openAppSettings();
               }
-            } else {
-              controller.getFotoBast(ImageSource.camera);
-            }
+            });
             Get.back();
           },
           onTapGalery: () async {
-            var status = await Permission.storage.status;
-            if (status.isDenied) {
-              if (await Permission.storage.request().isGranted) {
+            await PermissionService.to.storageRequest().then((value) {
+              if (value == true) {
                 controller.getFotoBast(ImageSource.gallery);
-              } else {
-                openAppSettings();
               }
-            } else {
-              controller.getFotoBast(ImageSource.gallery);
-            }
+            });
             Get.back();
           },
         );

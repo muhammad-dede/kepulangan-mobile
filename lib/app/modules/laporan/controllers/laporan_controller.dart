@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
 
@@ -10,9 +9,9 @@ import 'package:kepulangan/app/data/models/group.dart';
 import 'package:kepulangan/app/routes/app_pages.dart';
 import 'package:kepulangan/app/services/auth_service.dart';
 import 'package:kepulangan/app/services/base_client.dart';
+import 'package:kepulangan/app/services/permission_service.dart';
 import 'package:kepulangan/app/services/storage_service.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class LaporanController extends GetxController {
   final formState = GlobalKey<FormState>();
@@ -113,12 +112,8 @@ class LaporanController extends GetxController {
   }
 
   Future<void> downloadExcel(String? downloadUrl) async {
-    if (Platform.isAndroid) {
-      var status = await Permission.storage.status;
-      if (status != PermissionStatus.granted) {
-        status = await Permission.storage.request();
-      }
-      if (status.isGranted) {
+    PermissionService.to.storageRequest().then((value) async {
+      if (value == true) {
         try {
           final dir = await getExternalStorageDirectory();
           if (dir != null) {
@@ -137,7 +132,7 @@ class LaporanController extends GetxController {
           EasyLoading.showError(e.toString());
         }
       }
-    }
+    });
   }
 
   Future<void> save() async {

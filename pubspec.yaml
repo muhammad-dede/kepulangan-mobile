@@ -31,6 +31,7 @@ dependencies:
   flutter_downloader: ^1.10.4
   flutter: 
     sdk: flutter
+  device_info_plus: ^8.2.2
 
 dev_dependencies: 
   flutter_lints: 2.0.1

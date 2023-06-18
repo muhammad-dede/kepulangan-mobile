@@ -111,7 +111,11 @@ class Imigran {
     kepulangan = json['kepulangan'] != null
         ? Kepulangan.fromJson(json['kepulangan'])
         : null;
-    terlaksana = json['terlaksana'] == null || json['terlaksana'] == 0 ? 0 : 1;
+    terlaksana = json['terlaksana'] == null ||
+            json['terlaksana'] == 0 ||
+            json['terlaksana'] == "0"
+        ? 0
+        : 1;
     user = json['user'] != null ? User.fromJson(json['user']) : null;
     pmi = json['pmi'] != null ? Pmi.fromJson(json['pmi']) : null;
     jenazah =

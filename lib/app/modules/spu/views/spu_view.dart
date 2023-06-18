@@ -7,9 +7,9 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:kepulangan/app/services/permission_service.dart';
 import 'package:kepulangan/app/widgets/date_picker_widget.dart';
 import 'package:kepulangan/app/widgets/text_form_field_widget.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import '../controllers/spu_controller.dart';
 
@@ -382,16 +382,13 @@ class InputSpuTiket extends GetView<SpuController> {
                           leading: const Icon(Icons.camera_enhance),
                           title: const Text('Kamera'),
                           onTap: () async {
-                            var status = await Permission.camera.status;
-                            if (status.isDenied) {
-                              if (await Permission.camera.request().isGranted) {
+                            await PermissionService.to
+                                .cameraRequest()
+                                .then((value) {
+                              if (value == true) {
                                 controller.getFotoTiket(ImageSource.camera);
-                              } else {
-                                openAppSettings();
                               }
-                            } else {
-                              controller.getFotoTiket(ImageSource.camera);
-                            }
+                            });
                             Get.back();
                           },
                         ),
@@ -399,18 +396,13 @@ class InputSpuTiket extends GetView<SpuController> {
                           leading: const Icon(Icons.image),
                           title: const Text('Galeri'),
                           onTap: () async {
-                            var status = await Permission.storage.status;
-                            if (status.isDenied) {
-                              if (await Permission.storage
-                                  .request()
-                                  .isGranted) {
+                            await PermissionService.to
+                                .storageRequest()
+                                .then((value) {
+                              if (value == true) {
                                 controller.getFotoTiket(ImageSource.gallery);
-                              } else {
-                                openAppSettings();
                               }
-                            } else {
-                              controller.getFotoTiket(ImageSource.gallery);
-                            }
+                            });
                             Get.back();
                           },
                         ),

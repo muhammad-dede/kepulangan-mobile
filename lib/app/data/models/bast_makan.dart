@@ -51,7 +51,11 @@ class BastMakan {
     fotoPenyediaJasa = json['foto_penyedia_jasa'];
     fotoSerahTerima = json['foto_serah_terima'];
     fotoInvoice = json['foto_invoice'];
-    terlaksana = json['terlaksana'] == null || json['terlaksana'] == 0 ? 0 : 1;
+    terlaksana = json['terlaksana'] == null ||
+            json['terlaksana'] == 0 ||
+            json['terlaksana'] == "0"
+        ? 0
+        : 1;
     user = json['user'] != null ? User.fromJson(json['user']) : null;
     if (json['makan'] != null) {
       makan = <Makan>[];

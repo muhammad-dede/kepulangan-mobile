@@ -1,13 +1,12 @@
-import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:kepulangan/app/services/permission_service.dart';
 import 'package:kepulangan/app/services/storage_service.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class PdfController extends GetxController {
   String? title = Get.arguments["title"];
@@ -48,12 +47,8 @@ class PdfController extends GetxController {
   }
 
   Future<void> download() async {
-    if (Platform.isAndroid) {
-      var status = await Permission.storage.status;
-      if (status != PermissionStatus.granted) {
-        status = await Permission.storage.request();
-      }
-      if (status.isGranted) {
+    PermissionService.to.storageRequest().then((value) async {
+      if (value == true) {
         try {
           final dir = await getExternalStorageDirectory();
           if (dir != null) {
@@ -72,6 +67,6 @@ class PdfController extends GetxController {
           EasyLoading.showError(e.toString());
         }
       }
-    }
+    });
   }
 }

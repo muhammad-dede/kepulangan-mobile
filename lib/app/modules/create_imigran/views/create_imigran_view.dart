@@ -4,10 +4,10 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:kepulangan/app/services/auth_service.dart';
+import 'package:kepulangan/app/services/permission_service.dart';
 import 'package:kepulangan/app/widgets/date_picker_widget.dart';
 import 'package:kepulangan/app/widgets/image_picker_widget.dart';
 import 'package:kepulangan/app/widgets/text_form_field_widget.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import '../controllers/create_imigran_controller.dart';
 
@@ -1261,29 +1261,19 @@ class InputFotoPmi extends GetView<CreateImigranController> {
             controller.update();
           },
           onTapCamera: () async {
-            var status = await Permission.camera.status;
-            if (status.isDenied) {
-              if (await Permission.camera.request().isGranted) {
+            await PermissionService.to.cameraRequest().then((value) {
+              if (value == true) {
                 controller.getFotoPmi(ImageSource.camera);
-              } else {
-                openAppSettings();
               }
-            } else {
-              controller.getFotoPmi(ImageSource.camera);
-            }
+            });
             Get.back();
           },
           onTapGalery: () async {
-            var status = await Permission.storage.status;
-            if (status.isDenied) {
-              if (await Permission.storage.request().isGranted) {
+            await PermissionService.to.storageRequest().then((value) {
+              if (value == true) {
                 controller.getFotoPmi(ImageSource.gallery);
-              } else {
-                openAppSettings();
               }
-            } else {
-              controller.getFotoPmi(ImageSource.gallery);
-            }
+            });
             Get.back();
           },
         );
@@ -1309,29 +1299,19 @@ class InputFotoJenazah extends GetView<CreateImigranController> {
             controller.update();
           },
           onTapCamera: () async {
-            var status = await Permission.camera.status;
-            if (status.isDenied) {
-              if (await Permission.camera.request().isGranted) {
+            await PermissionService.to.cameraRequest().then((value) {
+              if (value == true) {
                 controller.getFotoJenazah(ImageSource.camera);
-              } else {
-                openAppSettings();
               }
-            } else {
-              controller.getFotoJenazah(ImageSource.camera);
-            }
+            });
             Get.back();
           },
           onTapGalery: () async {
-            var status = await Permission.storage.status;
-            if (status.isDenied) {
-              if (await Permission.storage.request().isGranted) {
+            await PermissionService.to.storageRequest().then((value) {
+              if (value == true) {
                 controller.getFotoJenazah(ImageSource.gallery);
-              } else {
-                openAppSettings();
               }
-            } else {
-              controller.getFotoJenazah(ImageSource.gallery);
-            }
+            });
             Get.back();
           },
         );
@@ -1357,29 +1337,19 @@ class InputFotoPaspor extends GetView<CreateImigranController> {
             controller.update();
           },
           onTapCamera: () async {
-            var status = await Permission.camera.status;
-            if (status.isDenied) {
-              if (await Permission.camera.request().isGranted) {
+            await PermissionService.to.cameraRequest().then((value) {
+              if (value == true) {
                 controller.getFotoPaspor(ImageSource.camera);
-              } else {
-                openAppSettings();
               }
-            } else {
-              controller.getFotoPaspor(ImageSource.camera);
-            }
+            });
             Get.back();
           },
           onTapGalery: () async {
-            var status = await Permission.storage.status;
-            if (status.isDenied) {
-              if (await Permission.storage.request().isGranted) {
+            await PermissionService.to.storageRequest().then((value) {
+              if (value == true) {
                 controller.getFotoPaspor(ImageSource.gallery);
-              } else {
-                openAppSettings();
               }
-            } else {
-              controller.getFotoPaspor(ImageSource.gallery);
-            }
+            });
             Get.back();
           },
         );
@@ -1405,29 +1375,19 @@ class InputFotoBrafaks extends GetView<CreateImigranController> {
             controller.update();
           },
           onTapCamera: () async {
-            var status = await Permission.camera.status;
-            if (status.isDenied) {
-              if (await Permission.camera.request().isGranted) {
+            await PermissionService.to.cameraRequest().then((value) {
+              if (value == true) {
                 controller.getFotoBrafaks(ImageSource.camera);
-              } else {
-                openAppSettings();
               }
-            } else {
-              controller.getFotoBrafaks(ImageSource.camera);
-            }
+            });
             Get.back();
           },
           onTapGalery: () async {
-            var status = await Permission.storage.status;
-            if (status.isDenied) {
-              if (await Permission.storage.request().isGranted) {
+            await PermissionService.to.storageRequest().then((value) {
+              if (value == true) {
                 controller.getFotoBrafaks(ImageSource.gallery);
-              } else {
-                openAppSettings();
               }
-            } else {
-              controller.getFotoBrafaks(ImageSource.gallery);
-            }
+            });
             Get.back();
           },
         );

@@ -45,7 +45,11 @@ class BastDarat {
         : null;
     fotoPenyediaJasa = json['foto_penyedia_jasa'];
     fotoSerahTerima = json['foto_serah_terima'];
-    terlaksana = json['terlaksana'] == null || json['terlaksana'] == 0 ? 0 : 1;
+    terlaksana = json['terlaksana'] == null ||
+            json['terlaksana'] == 0 ||
+            json['terlaksana'] == "0"
+        ? 0
+        : 1;
     user = json['user'] != null ? User.fromJson(json['user']) : null;
     if (json['darat'] != null) {
       darat = <Darat>[];

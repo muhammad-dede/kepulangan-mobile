@@ -5,11 +5,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:kepulangan/app/data/models/imigran.dart';
 import 'package:kepulangan/app/data/models/makan.dart';
+import 'package:kepulangan/app/services/permission_service.dart';
 import 'package:kepulangan/app/widgets/date_picker_widget.dart';
 import 'package:kepulangan/app/widgets/image_picker_widget.dart';
 import 'package:kepulangan/app/widgets/list_detail_widget.dart';
 import 'package:kepulangan/app/widgets/text_form_field_widget.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import '../controllers/edit_bast_makan_controller.dart';
 
@@ -504,29 +504,19 @@ class InputFotoPenyediaJasa extends GetView<EditBastMakanController> {
             controller.update();
           },
           onTapCamera: () async {
-            var status = await Permission.camera.status;
-            if (status.isDenied) {
-              if (await Permission.camera.request().isGranted) {
+            await PermissionService.to.cameraRequest().then((value) {
+              if (value == true) {
                 controller.getFotoPenyediaJasa(ImageSource.camera);
-              } else {
-                openAppSettings();
               }
-            } else {
-              controller.getFotoPenyediaJasa(ImageSource.camera);
-            }
+            });
             Get.back();
           },
           onTapGalery: () async {
-            var status = await Permission.storage.status;
-            if (status.isDenied) {
-              if (await Permission.storage.request().isGranted) {
+            await PermissionService.to.storageRequest().then((value) {
+              if (value == true) {
                 controller.getFotoPenyediaJasa(ImageSource.gallery);
-              } else {
-                openAppSettings();
               }
-            } else {
-              controller.getFotoPenyediaJasa(ImageSource.gallery);
-            }
+            });
             Get.back();
           },
         );
@@ -553,29 +543,19 @@ class InputFotoSerahTerima extends GetView<EditBastMakanController> {
             controller.update();
           },
           onTapCamera: () async {
-            var status = await Permission.camera.status;
-            if (status.isDenied) {
-              if (await Permission.camera.request().isGranted) {
+            await PermissionService.to.cameraRequest().then((value) {
+              if (value == true) {
                 controller.getFotoSerahTerima(ImageSource.camera);
-              } else {
-                openAppSettings();
               }
-            } else {
-              controller.getFotoSerahTerima(ImageSource.camera);
-            }
+            });
             Get.back();
           },
           onTapGalery: () async {
-            var status = await Permission.storage.status;
-            if (status.isDenied) {
-              if (await Permission.storage.request().isGranted) {
+            await PermissionService.to.storageRequest().then((value) {
+              if (value == true) {
                 controller.getFotoSerahTerima(ImageSource.gallery);
-              } else {
-                openAppSettings();
               }
-            } else {
-              controller.getFotoSerahTerima(ImageSource.gallery);
-            }
+            });
             Get.back();
           },
         );
@@ -602,29 +582,19 @@ class InputFotoInvoice extends GetView<EditBastMakanController> {
             controller.update();
           },
           onTapCamera: () async {
-            var status = await Permission.camera.status;
-            if (status.isDenied) {
-              if (await Permission.camera.request().isGranted) {
+            await PermissionService.to.cameraRequest().then((value) {
+              if (value == true) {
                 controller.getFotoInvoice(ImageSource.camera);
-              } else {
-                openAppSettings();
               }
-            } else {
-              controller.getFotoInvoice(ImageSource.camera);
-            }
+            });
             Get.back();
           },
           onTapGalery: () async {
-            var status = await Permission.storage.status;
-            if (status.isDenied) {
-              if (await Permission.storage.request().isGranted) {
+            await PermissionService.to.storageRequest().then((value) {
+              if (value == true) {
                 controller.getFotoInvoice(ImageSource.gallery);
-              } else {
-                openAppSettings();
               }
-            } else {
-              controller.getFotoInvoice(ImageSource.gallery);
-            }
+            });
             Get.back();
           },
         );
