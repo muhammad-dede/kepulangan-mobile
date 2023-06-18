@@ -19,13 +19,11 @@ class LaporanController extends GetxController {
   final startDateController = TextEditingController();
   final endDateController = TextEditingController();
   final jenisLaporanController = TextEditingController();
-  final groupController = TextEditingController();
 
   DateTime? startDate;
   DateTime? endDate;
   int? jenisLaporan;
   String? url;
-  int? idGroup;
 
   List<Map<String, dynamic>> listJenisLaporan = [
     {
@@ -65,15 +63,6 @@ class LaporanController extends GetxController {
   }
 
   @override
-  void onReady() {
-    if (AuthService.to.isAdmin.isFalse) {
-      groupController.text = AuthService.to.auth.value.nama ?? "";
-      idGroup = AuthService.to.auth.value.group?.id;
-    }
-    super.onReady();
-  }
-
-  @override
   void onClose() {
     startDateController.dispose();
     endDateController.dispose();
@@ -87,22 +76,6 @@ class LaporanController extends GetxController {
       return "Bidang ini wajib diisi";
     }
     return null;
-  }
-
-  Future<void> getGroup() async {
-    try {
-      isLoading = true;
-      final response = await BaseClient().get("/api/referensi/group");
-      response.fold((l) {
-        listGroup = [];
-      }, (r) {
-        List data = r['data'];
-        listGroup = data.map((e) => Group.fromJson(e)).toList();
-      });
-    } finally {
-      isLoading = false;
-      update();
-    }
   }
 
   @pragma('vm:entry-point')
@@ -144,9 +117,9 @@ class LaporanController extends GetxController {
           arguments: {
             "title": jenisLaporanController.text,
             "stream_url":
-                "$url?id_user=${AuthService.to.auth.value.id}&id_group=$idGroup&start_date=${DateFormat('yyyy-MM-dd').format(startDate!)}&end_date=${DateFormat('yyyy-MM-dd').format(endDate!)}&download=false",
+                "$url?id_user=${AuthService.to.auth.value.id}&start_date=${DateFormat('yyyy-MM-dd').format(startDate!)}&end_date=${DateFormat('yyyy-MM-dd').format(endDate!)}&download=false",
             "download_url":
-                "$url?id_user=${AuthService.to.auth.value.id}&id_group=$idGroup&start_date=${DateFormat('yyyy-MM-dd').format(startDate!)}&end_date=${DateFormat('yyyy-MM-dd').format(endDate!)}&download=true"
+                "$url?id_user=${AuthService.to.auth.value.id}&start_date=${DateFormat('yyyy-MM-dd').format(startDate!)}&end_date=${DateFormat('yyyy-MM-dd').format(endDate!)}&download=true"
           },
         );
       } else {
