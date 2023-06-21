@@ -139,7 +139,11 @@ class Uncompleted extends GetView<DetailBastUdaraController> {
                 ),
                 TextButton(
                   onPressed: () {
-                    actionUbah();
+                    if (controller.isCanSpu()) {
+                      actionSpu();
+                    } else {
+                      actionUbah();
+                    }
                   },
                   child: const Text("Lengkapi"),
                 ),
