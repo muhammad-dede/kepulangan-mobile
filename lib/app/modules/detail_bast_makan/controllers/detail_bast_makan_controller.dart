@@ -69,7 +69,7 @@ class DetailBastMakanController extends GetxController
   bool isCompleteBastMakan() {
     return bastMakan.value.fotoPenyediaJasa != null &&
             bastMakan.value.fotoSerahTerima != null &&
-            bastMakan.value.fotoInvoice == null
+            bastMakan.value.fotoInvoice != null
         ? true
         : false;
   }
