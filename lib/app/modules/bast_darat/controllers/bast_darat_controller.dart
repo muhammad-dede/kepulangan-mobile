@@ -36,28 +36,6 @@ class BastDaratController extends GetxController {
     super.onClose();
   }
 
-  bool isCanTerlaksana(BastDarat item) {
-    return item.fotoPenyediaJasa != null &&
-            item.fotoSerahTerima != null &&
-            item.darat!.isNotEmpty &&
-            item.darat!.where((element) => element.fotoBast == null).isEmpty &&
-            item.terlaksana == 0
-        ? true
-        : false;
-  }
-
-  bool isCanExport(BastDarat item) {
-    return item.terlaksana == 1 ? true : false;
-  }
-
-  bool isCanEdit(BastDarat item) {
-    return item.terlaksana == 0 || AuthService.to.isAdmin.isTrue ? true : false;
-  }
-
-  bool isCanDelete(BastDarat item) {
-    return item.terlaksana == 0 || AuthService.to.isAdmin.isTrue ? true : false;
-  }
-
   Future<void> refreshData() async {
     Future.sync(
       () => pagingController.refresh(),
@@ -138,5 +116,40 @@ class BastDaratController extends GetxController {
     } finally {
       EasyLoading.dismiss();
     }
+  }
+
+  bool isCompleteBastDarat(BastDarat item) {
+    return item.fotoPenyediaJasa != null && item.fotoSerahTerima != null
+        ? true
+        : false;
+  }
+
+  bool isCompleteDarat(BastDarat item) {
+    return item.darat!.isNotEmpty &&
+            item.darat!.where((element) => element.fotoBast == null).isEmpty
+        ? true
+        : false;
+  }
+
+  bool isShowTerlaksana(BastDarat item) {
+    return isCompleteBastDarat(item) == true &&
+            isCompleteDarat(item) == true &&
+            item.terlaksana == 0
+        ? true
+        : false;
+  }
+
+  bool isShowExport(BastDarat item) {
+    return isCompleteBastDarat(item) == true && isCompleteDarat(item) == true
+        ? true
+        : false;
+  }
+
+  bool isShowEdit(BastDarat item) {
+    return item.terlaksana == 0 || AuthService.to.isAdmin.isTrue ? true : false;
+  }
+
+  bool isShowDelete(BastDarat item) {
+    return item.terlaksana == 0 || AuthService.to.isAdmin.isTrue ? true : false;
   }
 }

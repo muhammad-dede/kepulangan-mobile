@@ -65,12 +65,12 @@ class SearchBastMakanPage extends SearchDelegate {
                 trailing: PopupMenuButton(
                   itemBuilder: (context) {
                     return [
-                      if (BastMakanController.to.isCanTerlaksana(item))
+                      if (BastMakanController.to.isShowTerlaksana(item))
                         const PopupMenuItem(
                           value: "terlaksana",
                           child: Text("Terlaksana"),
                         ),
-                      if (BastMakanController.to.isCanExport(item))
+                      if (BastMakanController.to.isShowExport(item))
                         const PopupMenuItem(
                           value: "export",
                           child: Text("Export"),
@@ -79,12 +79,12 @@ class SearchBastMakanPage extends SearchDelegate {
                         value: "detail",
                         child: Text("Detail"),
                       ),
-                      if (BastMakanController.to.isCanEdit(item))
+                      if (BastMakanController.to.isShowEdit(item))
                         const PopupMenuItem(
                           value: "ubah",
                           child: Text("Ubah"),
                         ),
-                      if (BastMakanController.to.isCanDelete(item))
+                      if (BastMakanController.to.isShowDelete(item))
                         const PopupMenuItem(
                           value: "hapus",
                           child: Text("Hapus"),
@@ -151,12 +151,12 @@ class SearchBastMakanPage extends SearchDelegate {
                 trailing: PopupMenuButton(
                   itemBuilder: (context) {
                     return [
-                      if (BastMakanController.to.isCanTerlaksana(item))
+                      if (BastMakanController.to.isShowTerlaksana(item))
                         const PopupMenuItem(
                           value: "terlaksana",
                           child: Text("Terlaksana"),
                         ),
-                      if (BastMakanController.to.isCanExport(item))
+                      if (BastMakanController.to.isShowExport(item))
                         const PopupMenuItem(
                           value: "export",
                           child: Text("Export"),
@@ -165,12 +165,12 @@ class SearchBastMakanPage extends SearchDelegate {
                         value: "detail",
                         child: Text("Detail"),
                       ),
-                      if (BastMakanController.to.isCanEdit(item))
+                      if (BastMakanController.to.isShowEdit(item))
                         const PopupMenuItem(
                           value: "ubah",
                           child: Text("Ubah"),
                         ),
-                      if (BastMakanController.to.isCanDelete(item))
+                      if (BastMakanController.to.isShowDelete(item))
                         const PopupMenuItem(
                           value: "hapus",
                           child: Text("Hapus"),

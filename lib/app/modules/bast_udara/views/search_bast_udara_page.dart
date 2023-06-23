@@ -67,22 +67,18 @@ class SearchBastUdaraPage extends SearchDelegate {
                 trailing: PopupMenuButton(
                   itemBuilder: (context) {
                     return [
-                      if (BastUdaraController.to.isCanTerlaksana(item))
+                      if (BastUdaraController.to.isShowTerlaksana(item))
                         const PopupMenuItem(
                           value: "terlaksana",
                           child: Text("Terlaksana"),
                         ),
-                      if (BastUdaraController.to.isCanSpu(item))
+                      if (BastUdaraController.to.isShowSpu(item))
                         const PopupMenuItem(
                           value: "spu",
                           child: Text("SPU"),
                         ),
-                      if (BastUdaraController.to.isCanEditSpu(item))
-                        const PopupMenuItem(
-                          value: "edit_spu",
-                          child: Text("Ubah SPU"),
-                        ),
-                      if (BastUdaraController.to.isCanExport(item))
+                      if (BastUdaraController.to.isShowExportBastUdara(item) ||
+                          BastUdaraController.to.isShowExportSpu(item))
                         const PopupMenuItem(
                           value: "export",
                           child: Text("Export"),
@@ -91,12 +87,12 @@ class SearchBastUdaraPage extends SearchDelegate {
                         value: "detail",
                         child: Text("Detail"),
                       ),
-                      if (BastUdaraController.to.isCanEdit(item))
+                      if (BastUdaraController.to.isShowEdit(item))
                         const PopupMenuItem(
                           value: "ubah",
                           child: Text("Ubah"),
                         ),
-                      if (BastUdaraController.to.isCanDelete(item))
+                      if (BastUdaraController.to.isShowDelete(item))
                         const PopupMenuItem(
                           value: "hapus",
                           child: Text("Hapus"),
@@ -109,9 +105,6 @@ class SearchBastUdaraPage extends SearchDelegate {
                     }
                     if (value == 'spu') {
                       actionSpu(item);
-                    }
-                    if (value == 'edit_spu') {
-                      actionEditSpu(item);
                     }
                     if (value == 'export') {
                       actionExport(context, item);
@@ -171,22 +164,18 @@ class SearchBastUdaraPage extends SearchDelegate {
                 trailing: PopupMenuButton(
                   itemBuilder: (context) {
                     return [
-                      if (BastUdaraController.to.isCanTerlaksana(item))
+                      if (BastUdaraController.to.isShowTerlaksana(item))
                         const PopupMenuItem(
                           value: "terlaksana",
                           child: Text("Terlaksana"),
                         ),
-                      if (BastUdaraController.to.isCanSpu(item))
+                      if (BastUdaraController.to.isShowSpu(item))
                         const PopupMenuItem(
                           value: "spu",
                           child: Text("SPU"),
                         ),
-                      if (BastUdaraController.to.isCanEditSpu(item))
-                        const PopupMenuItem(
-                          value: "edit_spu",
-                          child: Text("Ubah SPU"),
-                        ),
-                      if (BastUdaraController.to.isCanExport(item))
+                      if (BastUdaraController.to.isShowExportBastUdara(item) ||
+                          BastUdaraController.to.isShowExportSpu(item))
                         const PopupMenuItem(
                           value: "export",
                           child: Text("Export"),
@@ -195,12 +184,12 @@ class SearchBastUdaraPage extends SearchDelegate {
                         value: "detail",
                         child: Text("Detail"),
                       ),
-                      if (BastUdaraController.to.isCanEdit(item))
+                      if (BastUdaraController.to.isShowEdit(item))
                         const PopupMenuItem(
                           value: "ubah",
                           child: Text("Ubah"),
                         ),
-                      if (BastUdaraController.to.isCanDelete(item))
+                      if (BastUdaraController.to.isShowDelete(item))
                         const PopupMenuItem(
                           value: "hapus",
                           child: Text("Hapus"),
@@ -213,9 +202,6 @@ class SearchBastUdaraPage extends SearchDelegate {
                     }
                     if (value == 'spu') {
                       actionSpu(item);
-                    }
-                    if (value == 'edit_spu') {
-                      actionEditSpu(item);
                     }
                     if (value == 'export') {
                       actionExport(context, item);
@@ -275,11 +261,6 @@ void actionSpu(BastUdara item) {
   Get.toNamed(Routes.spu, arguments: item);
 }
 
-void actionEditSpu(BastUdara item) {
-  Get.back();
-  Get.toNamed(Routes.spu, arguments: item);
-}
-
 void actionExport(context, BastUdara item) {
   Get.bottomSheet(
     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -303,24 +284,25 @@ void actionExport(context, BastUdara item) {
           ),
         ),
         const Divider(height: 0),
-        ListTile(
-          title: const Text("Berita Acara Serah Terima PMI"),
-          onTap: () {
-            Get.back();
-            Get.back();
-            Get.toNamed(
-              Routes.pdf,
-              arguments: {
-                "title": "Berita Acara Serah Terima PMI",
-                "stream_url":
-                    "${BaseClient.apiUrl}/api/pdf/bast-udara/${item.id}?download=false",
-                "download_url":
-                    "${BaseClient.apiUrl}/api/pdf/bast-udara/${item.id}?download=true"
-              },
-            );
-          },
-        ),
-        if (item.spu != null && item.terlaksana == 1)
+        if (BastUdaraController.to.isShowExportBastUdara(item))
+          ListTile(
+            title: const Text("Berita Acara Serah Terima PMI"),
+            onTap: () {
+              Get.back();
+              Get.back();
+              Get.toNamed(
+                Routes.pdf,
+                arguments: {
+                  "title": "Berita Acara Serah Terima PMI",
+                  "stream_url":
+                      "${BaseClient.apiUrl}/api/pdf/bast-udara/${item.id}?download=false",
+                  "download_url":
+                      "${BaseClient.apiUrl}/api/pdf/bast-udara/${item.id}?download=true"
+                },
+              );
+            },
+          ),
+        if (BastUdaraController.to.isShowExportSpu(item))
           ListTile(
             title: const Text("Surat Pengantar Udara"),
             onTap: () {

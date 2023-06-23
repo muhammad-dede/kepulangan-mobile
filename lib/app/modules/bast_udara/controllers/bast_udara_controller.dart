@@ -36,58 +36,6 @@ class BastUdaraController extends GetxController {
     super.onClose();
   }
 
-  bool isCanTerlaksana(BastUdara item) {
-    return item.fotoPenyediaJasa != null &&
-            item.fotoSerahTerima != null &&
-            item.udara!.isNotEmpty &&
-            item.udara!
-                .where((element) => element.fotoBoardingPass == null)
-                .isEmpty &&
-            item.spu != null &&
-            item.spu!.spuTiket!.isNotEmpty &&
-            item.terlaksana == 0
-        ? true
-        : false;
-  }
-
-  bool isCanSpu(BastUdara item) {
-    return item.fotoPenyediaJasa != null &&
-            item.fotoSerahTerima != null &&
-            item.udara!.isNotEmpty &&
-            item.udara!
-                .where((element) => element.fotoBoardingPass == null)
-                .isEmpty &&
-            item.spu == null &&
-            item.terlaksana == 0
-        ? true
-        : false;
-  }
-
-  bool isCanEditSpu(BastUdara item) {
-    return item.fotoPenyediaJasa != null &&
-            item.fotoSerahTerima != null &&
-            item.udara!.isNotEmpty &&
-            item.udara!
-                .where((element) => element.fotoBoardingPass == null)
-                .isEmpty &&
-            item.spu != null &&
-            item.terlaksana == 0
-        ? true
-        : false;
-  }
-
-  bool isCanExport(BastUdara item) {
-    return item.terlaksana == 1 ? true : false;
-  }
-
-  bool isCanEdit(BastUdara item) {
-    return item.terlaksana == 0 || AuthService.to.isAdmin.isTrue ? true : false;
-  }
-
-  bool isCanDelete(BastUdara item) {
-    return item.terlaksana == 0 || AuthService.to.isAdmin.isTrue ? true : false;
-  }
-
   Future<void> refreshData() async {
     Future.sync(
       () => pagingController.refresh(),
@@ -168,5 +116,71 @@ class BastUdaraController extends GetxController {
     } finally {
       EasyLoading.dismiss();
     }
+  }
+
+  bool isCompleteBastUdara(BastUdara item) {
+    return item.fotoPenyediaJasa != null && item.fotoSerahTerima != null
+        ? true
+        : false;
+  }
+
+  bool isCompleteUdara(BastUdara item) {
+    return item.udara!.isNotEmpty &&
+            item.udara!
+                .where((element) => element.fotoBoardingPass == null)
+                .isEmpty
+        ? true
+        : false;
+  }
+
+  bool isCompleteSpu(BastUdara item) {
+    return item.spu != null ? true : false;
+  }
+
+  bool isCompleteSpuTiket(BastUdara item) {
+    return item.spu!.spuTiket!.isNotEmpty &&
+            item.spu!.spuTiket!
+                .where((element) => element.fotoTiket == null)
+                .isEmpty
+        ? true
+        : false;
+  }
+
+  bool isShowTerlaksana(BastUdara item) {
+    return isCompleteBastUdara(item) == true &&
+            isCompleteUdara(item) == true &&
+            isCompleteSpu(item) == true &&
+            isCompleteSpuTiket(item) == true &&
+            item.terlaksana == 0
+        ? true
+        : false;
+  }
+
+  bool isShowSpu(BastUdara item) {
+    return isCompleteBastUdara(item) == true &&
+            isCompleteUdara(item) == true &&
+            (item.terlaksana == 0 || AuthService.to.isAdmin.isTrue)
+        ? true
+        : false;
+  }
+
+  bool isShowExportBastUdara(BastUdara item) {
+    return isCompleteBastUdara(item) == true && isCompleteUdara(item) == true
+        ? true
+        : false;
+  }
+
+  bool isShowExportSpu(BastUdara item) {
+    return isCompleteSpu(item) == true && isCompleteSpuTiket(item) == true
+        ? true
+        : false;
+  }
+
+  bool isShowEdit(BastUdara item) {
+    return item.terlaksana == 0 || AuthService.to.isAdmin.isTrue ? true : false;
+  }
+
+  bool isShowDelete(BastUdara item) {
+    return item.terlaksana == 0 || AuthService.to.isAdmin.isTrue ? true : false;
   }
 }

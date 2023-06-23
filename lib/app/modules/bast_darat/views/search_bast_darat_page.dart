@@ -67,12 +67,12 @@ class SearchBastDaratPage extends SearchDelegate {
                 trailing: PopupMenuButton(
                   itemBuilder: (context) {
                     return [
-                      if (BastDaratController.to.isCanTerlaksana(item))
+                      if (BastDaratController.to.isShowTerlaksana(item))
                         const PopupMenuItem(
                           value: "terlaksana",
                           child: Text("Terlaksana"),
                         ),
-                      if (BastDaratController.to.isCanExport(item))
+                      if (BastDaratController.to.isShowExport(item))
                         const PopupMenuItem(
                           value: "export",
                           child: Text("Export"),
@@ -81,12 +81,12 @@ class SearchBastDaratPage extends SearchDelegate {
                         value: "detail",
                         child: Text("Detail"),
                       ),
-                      if (BastDaratController.to.isCanEdit(item))
+                      if (BastDaratController.to.isShowEdit(item))
                         const PopupMenuItem(
                           value: "ubah",
                           child: Text("Ubah"),
                         ),
-                      if (BastDaratController.to.isCanDelete(item))
+                      if (BastDaratController.to.isShowDelete(item))
                         const PopupMenuItem(
                           value: "hapus",
                           child: Text("Hapus"),
@@ -155,12 +155,12 @@ class SearchBastDaratPage extends SearchDelegate {
                 trailing: PopupMenuButton(
                   itemBuilder: (context) {
                     return [
-                      if (BastDaratController.to.isCanTerlaksana(item))
+                      if (BastDaratController.to.isShowTerlaksana(item))
                         const PopupMenuItem(
                           value: "terlaksana",
                           child: Text("Terlaksana"),
                         ),
-                      if (BastDaratController.to.isCanExport(item))
+                      if (BastDaratController.to.isShowExport(item))
                         const PopupMenuItem(
                           value: "export",
                           child: Text("Export"),
@@ -169,12 +169,12 @@ class SearchBastDaratPage extends SearchDelegate {
                         value: "detail",
                         child: Text("Detail"),
                       ),
-                      if (BastDaratController.to.isCanEdit(item))
+                      if (BastDaratController.to.isShowEdit(item))
                         const PopupMenuItem(
                           value: "ubah",
                           child: Text("Ubah"),
                         ),
-                      if (BastDaratController.to.isCanDelete(item))
+                      if (BastDaratController.to.isShowDelete(item))
                         const PopupMenuItem(
                           value: "hapus",
                           child: Text("Hapus"),

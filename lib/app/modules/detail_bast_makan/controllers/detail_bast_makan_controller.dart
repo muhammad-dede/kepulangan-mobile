@@ -26,37 +26,6 @@ class DetailBastMakanController extends GetxController
     super.onClose();
   }
 
-  bool isAnyEmpty() {
-    return bastMakan.value.fotoPenyediaJasa == null ||
-            bastMakan.value.fotoSerahTerima == null ||
-            bastMakan.value.fotoInvoice == null ||
-            bastMakan.value.makan!.isEmpty
-        ? true
-        : false;
-  }
-
-  bool isCanTerlaksana() {
-    return isAnyEmpty() == false && bastMakan.value.terlaksana == 0
-        ? true
-        : false;
-  }
-
-  bool isCanExport() {
-    return bastMakan.value.terlaksana == 1 ? true : false;
-  }
-
-  bool isCanEdit() {
-    return bastMakan.value.terlaksana == 0 || AuthService.to.isAdmin.isTrue
-        ? true
-        : false;
-  }
-
-  bool isCanDelete() {
-    return bastMakan.value.terlaksana == 0 || AuthService.to.isAdmin.isTrue
-        ? true
-        : false;
-  }
-
   Future<void> terlaksana() async {
     try {
       EasyLoading.show(
@@ -95,5 +64,43 @@ class DetailBastMakanController extends GetxController
     } finally {
       EasyLoading.dismiss();
     }
+  }
+
+  bool isCompleteBastMakan() {
+    return bastMakan.value.fotoPenyediaJasa != null &&
+            bastMakan.value.fotoSerahTerima != null &&
+            bastMakan.value.fotoInvoice == null
+        ? true
+        : false;
+  }
+
+  bool isCompleteMakan() {
+    return bastMakan.value.makan!.isNotEmpty ? true : false;
+  }
+
+  bool isShowTerlaksana() {
+    return isCompleteBastMakan() == true &&
+            isCompleteMakan() == true &&
+            bastMakan.value.terlaksana == 0
+        ? true
+        : false;
+  }
+
+  bool isShowExport() {
+    return isCompleteBastMakan() == true && isCompleteMakan() == true
+        ? true
+        : false;
+  }
+
+  bool isShowEdit() {
+    return bastMakan.value.terlaksana == 0 || AuthService.to.isAdmin.isTrue
+        ? true
+        : false;
+  }
+
+  bool isShowDelete() {
+    return bastMakan.value.terlaksana == 0 || AuthService.to.isAdmin.isTrue
+        ? true
+        : false;
   }
 }

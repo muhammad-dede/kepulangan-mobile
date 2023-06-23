@@ -67,12 +67,12 @@ class SearchBastPihakLainPage extends SearchDelegate {
                 trailing: PopupMenuButton(
                   itemBuilder: (context) {
                     return [
-                      if (BastPihakLainController.to.isCanTerlaksana(item))
+                      if (BastPihakLainController.to.isShowTerlaksana(item))
                         const PopupMenuItem(
                           value: "terlaksana",
                           child: Text("Terlaksana"),
                         ),
-                      if (BastPihakLainController.to.isCanExport(item))
+                      if (BastPihakLainController.to.isShowExport(item))
                         const PopupMenuItem(
                           value: "export",
                           child: Text("Export"),
@@ -81,12 +81,12 @@ class SearchBastPihakLainPage extends SearchDelegate {
                         value: "detail",
                         child: Text("Detail"),
                       ),
-                      if (BastPihakLainController.to.isCanEdit(item))
+                      if (BastPihakLainController.to.isShowEdit(item))
                         const PopupMenuItem(
                           value: "ubah",
                           child: Text("Ubah"),
                         ),
-                      if (BastPihakLainController.to.isCanDelete(item))
+                      if (BastPihakLainController.to.isShowDelete(item))
                         const PopupMenuItem(
                           value: "hapus",
                           child: Text("Hapus"),
@@ -155,12 +155,12 @@ class SearchBastPihakLainPage extends SearchDelegate {
                 trailing: PopupMenuButton(
                   itemBuilder: (context) {
                     return [
-                      if (BastPihakLainController.to.isCanTerlaksana(item))
+                      if (BastPihakLainController.to.isShowTerlaksana(item))
                         const PopupMenuItem(
                           value: "terlaksana",
                           child: Text("Terlaksana"),
                         ),
-                      if (BastPihakLainController.to.isCanExport(item))
+                      if (BastPihakLainController.to.isShowExport(item))
                         const PopupMenuItem(
                           value: "export",
                           child: Text("Export"),
@@ -169,12 +169,12 @@ class SearchBastPihakLainPage extends SearchDelegate {
                         value: "detail",
                         child: Text("Detail"),
                       ),
-                      if (BastPihakLainController.to.isCanEdit(item))
+                      if (BastPihakLainController.to.isShowEdit(item))
                         const PopupMenuItem(
                           value: "ubah",
                           child: Text("Ubah"),
                         ),
-                      if (BastPihakLainController.to.isCanDelete(item))
+                      if (BastPihakLainController.to.isShowDelete(item))
                         const PopupMenuItem(
                           value: "hapus",
                           child: Text("Hapus"),

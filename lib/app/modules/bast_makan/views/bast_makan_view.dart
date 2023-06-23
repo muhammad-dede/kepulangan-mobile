@@ -41,12 +41,12 @@ class BastMakanView extends GetView<BastMakanController> {
                 trailing: PopupMenuButton(
                   itemBuilder: (context) {
                     return [
-                      if (controller.isCanTerlaksana(item))
+                      if (controller.isShowTerlaksana(item))
                         const PopupMenuItem(
                           value: "terlaksana",
                           child: Text("Terlaksana"),
                         ),
-                      if (controller.isCanExport(item))
+                      if (controller.isShowExport(item))
                         const PopupMenuItem(
                           value: "export",
                           child: Text("Export"),
@@ -55,12 +55,12 @@ class BastMakanView extends GetView<BastMakanController> {
                         value: "detail",
                         child: Text("Detail"),
                       ),
-                      if (controller.isCanEdit(item))
+                      if (controller.isShowEdit(item))
                         const PopupMenuItem(
                           value: "ubah",
                           child: Text("Ubah"),
                         ),
-                      if (controller.isCanDelete(item))
+                      if (controller.isShowDelete(item))
                         const PopupMenuItem(
                           value: "hapus",
                           child: Text("Hapus"),

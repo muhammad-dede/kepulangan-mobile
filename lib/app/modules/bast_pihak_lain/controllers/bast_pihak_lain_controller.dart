@@ -36,27 +36,6 @@ class BastPihakLainController extends GetxController {
     super.onClose();
   }
 
-  bool isCanTerlaksana(BastPihakLain item) {
-    return item.fotoPihakKedua != null &&
-            item.fotoSerahTerima != null &&
-            item.jemputPihakLain!.isNotEmpty &&
-            item.terlaksana == 0
-        ? true
-        : false;
-  }
-
-  bool isCanExport(BastPihakLain item) {
-    return item.terlaksana == 1 ? true : false;
-  }
-
-  bool isCanEdit(BastPihakLain item) {
-    return item.terlaksana == 0 || AuthService.to.isAdmin.isTrue ? true : false;
-  }
-
-  bool isCanDelete(BastPihakLain item) {
-    return item.terlaksana == 0 || AuthService.to.isAdmin.isTrue ? true : false;
-  }
-
   Future<void> refreshData() async {
     Future.sync(
       () => pagingController.refresh(),
@@ -138,5 +117,38 @@ class BastPihakLainController extends GetxController {
     } finally {
       EasyLoading.dismiss();
     }
+  }
+
+  bool isCompleteBastPihakLain(BastPihakLain item) {
+    return item.fotoPihakKedua != null && item.fotoSerahTerima != null
+        ? true
+        : false;
+  }
+
+  bool isCompleteJemputPihakLain(BastPihakLain item) {
+    return item.jemputPihakLain!.isNotEmpty ? true : false;
+  }
+
+  bool isShowTerlaksana(BastPihakLain item) {
+    return isCompleteBastPihakLain(item) == true &&
+            isCompleteJemputPihakLain(item) == true &&
+            item.terlaksana == 0
+        ? true
+        : false;
+  }
+
+  bool isShowExport(BastPihakLain item) {
+    return isCompleteBastPihakLain(item) == true &&
+            isCompleteJemputPihakLain(item) == true
+        ? true
+        : false;
+  }
+
+  bool isShowEdit(BastPihakLain item) {
+    return item.terlaksana == 0 || AuthService.to.isAdmin.isTrue ? true : false;
+  }
+
+  bool isShowDelete(BastPihakLain item) {
+    return item.terlaksana == 0 || AuthService.to.isAdmin.isTrue ? true : false;
   }
 }

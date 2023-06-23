@@ -36,28 +36,6 @@ class BastMakanController extends GetxController {
     super.onClose();
   }
 
-  bool isCanTerlaksana(BastMakan item) {
-    return item.fotoPenyediaJasa != null &&
-            item.fotoSerahTerima != null &&
-            item.fotoInvoice != null &&
-            item.makan!.isNotEmpty &&
-            item.terlaksana == 0
-        ? true
-        : false;
-  }
-
-  bool isCanExport(BastMakan item) {
-    return item.terlaksana == 1 ? true : false;
-  }
-
-  bool isCanEdit(BastMakan item) {
-    return item.terlaksana == 0 || AuthService.to.isAdmin.isTrue ? true : false;
-  }
-
-  bool isCanDelete(BastMakan item) {
-    return item.terlaksana == 0 || AuthService.to.isAdmin.isTrue ? true : false;
-  }
-
   Future<void> refreshData() async {
     Future.sync(
       () => pagingController.refresh(),
@@ -138,5 +116,39 @@ class BastMakanController extends GetxController {
     } finally {
       EasyLoading.dismiss();
     }
+  }
+
+  bool isCompleteBastMakan(BastMakan item) {
+    return item.fotoPenyediaJasa != null &&
+            item.fotoSerahTerima != null &&
+            item.fotoInvoice == null
+        ? true
+        : false;
+  }
+
+  bool isCompleteMakan(BastMakan item) {
+    return item.makan!.isNotEmpty ? true : false;
+  }
+
+  bool isShowTerlaksana(BastMakan item) {
+    return isCompleteBastMakan(item) == true &&
+            isCompleteMakan(item) == true &&
+            item.terlaksana == 0
+        ? true
+        : false;
+  }
+
+  bool isShowExport(BastMakan item) {
+    return isCompleteBastMakan(item) == true && isCompleteMakan(item) == true
+        ? true
+        : false;
+  }
+
+  bool isShowEdit(BastMakan item) {
+    return item.terlaksana == 0 || AuthService.to.isAdmin.isTrue ? true : false;
+  }
+
+  bool isShowDelete(BastMakan item) {
+    return item.terlaksana == 0 || AuthService.to.isAdmin.isTrue ? true : false;
   }
 }

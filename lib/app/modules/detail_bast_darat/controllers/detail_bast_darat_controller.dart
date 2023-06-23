@@ -26,39 +26,6 @@ class DetailBastDaratController extends GetxController
     super.onClose();
   }
 
-  bool isAnyEmpty() {
-    return bastDarat.value.fotoPenyediaJasa == null ||
-            bastDarat.value.fotoSerahTerima == null ||
-            bastDarat.value.darat!.isEmpty ||
-            bastDarat.value.darat!
-                .where((element) => element.fotoBast == null)
-                .isNotEmpty
-        ? true
-        : false;
-  }
-
-  bool isCanTerlaksana() {
-    return isAnyEmpty() == false && bastDarat.value.terlaksana == 0
-        ? true
-        : false;
-  }
-
-  bool isCanExport() {
-    return bastDarat.value.terlaksana == 1 ? true : false;
-  }
-
-  bool isCanEdit() {
-    return bastDarat.value.terlaksana == 0 || AuthService.to.isAdmin.isTrue
-        ? true
-        : false;
-  }
-
-  bool isCanDelete() {
-    return bastDarat.value.terlaksana == 0 || AuthService.to.isAdmin.isTrue
-        ? true
-        : false;
-  }
-
   Future<void> terlaksana() async {
     try {
       EasyLoading.show(
@@ -97,5 +64,47 @@ class DetailBastDaratController extends GetxController
     } finally {
       EasyLoading.dismiss();
     }
+  }
+
+  bool isCompleteBastDarat() {
+    return bastDarat.value.fotoPenyediaJasa != null &&
+            bastDarat.value.fotoSerahTerima != null
+        ? true
+        : false;
+  }
+
+  bool isCompleteDarat() {
+    return bastDarat.value.darat!.isNotEmpty &&
+            bastDarat.value.darat!
+                .where((element) => element.fotoBast == null)
+                .isEmpty
+        ? true
+        : false;
+  }
+
+  bool isShowTerlaksana() {
+    return isCompleteBastDarat() == true &&
+            isCompleteDarat() == true &&
+            bastDarat.value.terlaksana == 0
+        ? true
+        : false;
+  }
+
+  bool isShowExport() {
+    return isCompleteBastDarat() == true && isCompleteDarat() == true
+        ? true
+        : false;
+  }
+
+  bool isShowEdit() {
+    return bastDarat.value.terlaksana == 0 || AuthService.to.isAdmin.isTrue
+        ? true
+        : false;
+  }
+
+  bool isShowDelete() {
+    return bastDarat.value.terlaksana == 0 || AuthService.to.isAdmin.isTrue
+        ? true
+        : false;
   }
 }

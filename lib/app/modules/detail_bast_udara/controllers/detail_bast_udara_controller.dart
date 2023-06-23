@@ -26,67 +26,6 @@ class DetailBastUdaraController extends GetxController
     super.onClose();
   }
 
-  bool isAnyEmpty() {
-    return bastUdara.value.fotoPenyediaJasa == null ||
-            bastUdara.value.fotoSerahTerima == null ||
-            bastUdara.value.udara!.isEmpty ||
-            bastUdara.value.udara!
-                .where((element) => element.fotoBoardingPass == null)
-                .isNotEmpty ||
-            bastUdara.value.spu == null ||
-            bastUdara.value.spu!.spuTiket!.isEmpty
-        ? true
-        : false;
-  }
-
-  bool isCanTerlaksana() {
-    return isAnyEmpty() == false && bastUdara.value.terlaksana == 0
-        ? true
-        : false;
-  }
-
-  bool isCanSpu() {
-    return bastUdara.value.fotoPenyediaJasa != null &&
-            bastUdara.value.fotoSerahTerima != null &&
-            bastUdara.value.udara!.isNotEmpty &&
-            bastUdara.value.udara!
-                .where((element) => element.fotoBoardingPass == null)
-                .isEmpty &&
-            bastUdara.value.spu == null &&
-            bastUdara.value.terlaksana == 0
-        ? true
-        : false;
-  }
-
-  bool isCanEditSpu() {
-    return bastUdara.value.fotoPenyediaJasa != null &&
-            bastUdara.value.fotoSerahTerima != null &&
-            bastUdara.value.udara!.isNotEmpty &&
-            bastUdara.value.udara!
-                .where((element) => element.fotoBoardingPass == null)
-                .isEmpty &&
-            bastUdara.value.spu != null &&
-            bastUdara.value.terlaksana == 0
-        ? true
-        : false;
-  }
-
-  bool isCanExport() {
-    return bastUdara.value.terlaksana == 1 ? true : false;
-  }
-
-  bool isCanEdit() {
-    return bastUdara.value.terlaksana == 0 || AuthService.to.isAdmin.isTrue
-        ? true
-        : false;
-  }
-
-  bool isCanDelete() {
-    return bastUdara.value.terlaksana == 0 || AuthService.to.isAdmin.isTrue
-        ? true
-        : false;
-  }
-
   Future<void> terlaksana() async {
     try {
       EasyLoading.show(
@@ -125,5 +64,76 @@ class DetailBastUdaraController extends GetxController
     } finally {
       EasyLoading.dismiss();
     }
+  }
+
+  bool isCompleteBastUdara() {
+    return bastUdara.value.fotoPenyediaJasa != null &&
+            bastUdara.value.fotoSerahTerima != null
+        ? true
+        : false;
+  }
+
+  bool isCompleteUdara() {
+    return bastUdara.value.udara!.isNotEmpty &&
+            bastUdara.value.udara!
+                .where((element) => element.fotoBoardingPass == null)
+                .isEmpty
+        ? true
+        : false;
+  }
+
+  bool isCompleteSpu() {
+    return bastUdara.value.spu != null ? true : false;
+  }
+
+  bool isCompleteSpuTiket() {
+    return bastUdara.value.spu!.spuTiket!.isNotEmpty &&
+            bastUdara.value.spu!.spuTiket!
+                .where((element) => element.fotoTiket == null)
+                .isEmpty
+        ? true
+        : false;
+  }
+
+  bool isShowTerlaksana() {
+    return isCompleteBastUdara() == true &&
+            isCompleteUdara() == true &&
+            isCompleteSpu() == true &&
+            isCompleteSpuTiket() == true &&
+            bastUdara.value.terlaksana == 0
+        ? true
+        : false;
+  }
+
+  bool isShowSpu() {
+    return isCompleteBastUdara() == true &&
+            isCompleteUdara() == true &&
+            (bastUdara.value.terlaksana == 0 || AuthService.to.isAdmin.isTrue)
+        ? true
+        : false;
+  }
+
+  bool isShowExportBastUdara() {
+    return isCompleteBastUdara() == true && isCompleteUdara() == true
+        ? true
+        : false;
+  }
+
+  bool isShowExportSpu() {
+    return isCompleteSpu() == true && isCompleteSpuTiket() == true
+        ? true
+        : false;
+  }
+
+  bool isShowEdit() {
+    return bastUdara.value.terlaksana == 0 || AuthService.to.isAdmin.isTrue
+        ? true
+        : false;
+  }
+
+  bool isShowDelete() {
+    return bastUdara.value.terlaksana == 0 || AuthService.to.isAdmin.isTrue
+        ? true
+        : false;
   }
 }

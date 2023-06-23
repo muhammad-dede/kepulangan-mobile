@@ -55,32 +55,28 @@ class PopupMenuAppBar extends GetView<DetailBastUdaraController> {
     return PopupMenuButton(
       itemBuilder: (context) {
         return [
-          if (controller.isCanTerlaksana())
+          if (controller.isShowTerlaksana())
             const PopupMenuItem(
               value: "terlaksana",
               child: Text("Terlaksana"),
             ),
-          if (controller.isCanSpu())
+          if (controller.isShowSpu())
             const PopupMenuItem(
               value: "spu",
               child: Text("SPU"),
             ),
-          if (controller.isCanEditSpu())
-            const PopupMenuItem(
-              value: "edit_spu",
-              child: Text("Ubah SPU"),
-            ),
-          if (controller.isCanExport())
+          if (controller.isShowExportBastUdara() ||
+              controller.isShowExportSpu())
             const PopupMenuItem(
               value: "export",
               child: Text("Export"),
             ),
-          if (controller.isCanEdit())
+          if (controller.isShowEdit())
             const PopupMenuItem(
               value: "ubah",
               child: Text("Ubah"),
             ),
-          if (controller.isCanDelete())
+          if (controller.isShowDelete())
             const PopupMenuItem(
               value: "hapus",
               child: Text("Hapus"),
@@ -93,9 +89,6 @@ class PopupMenuAppBar extends GetView<DetailBastUdaraController> {
         }
         if (value == 'spu') {
           actionSpu();
-        }
-        if (value == 'edit_spu') {
-          actionEditSpu();
         }
         if (value == 'export') {
           actionExport(context);
@@ -139,10 +132,11 @@ class Uncompleted extends GetView<DetailBastUdaraController> {
                 ),
                 TextButton(
                   onPressed: () {
-                    if (controller.isCanSpu()) {
-                      actionSpu();
-                    } else {
+                    if (controller.isShowExportBastUdara() == false) {
                       actionUbah();
+                    }
+                    if (controller.isShowExportSpu() == false) {
+                      actionSpu();
                     }
                   },
                   child: const Text("Lengkapi"),
@@ -168,7 +162,9 @@ class DataPenyediaJasa extends GetView<DetailBastUdaraController> {
         return ListView(
           padding: const EdgeInsets.all(10),
           children: [
-            if (controller.isAnyEmpty()) const Uncompleted(),
+            if (controller.isShowExportBastUdara() == false ||
+                controller.isShowExportSpu() == false)
+              const Uncompleted(),
             Card(
               child: Container(
                 padding: const EdgeInsets.all(12),
@@ -288,7 +284,9 @@ class DataPmi extends GetView<DetailBastUdaraController> {
             ? ListView(
                 padding: const EdgeInsets.all(10),
                 children: [
-                  if (controller.isAnyEmpty()) const Uncompleted(),
+                  if (controller.isShowExportBastUdara() == false ||
+                      controller.isShowExportSpu() == false)
+                    const Uncompleted(),
                   ListView.builder(
                     shrinkWrap: true,
                     itemCount: controller.bastUdara.value.udara?.length,
@@ -333,7 +331,9 @@ class DataSpu extends GetView<DetailBastUdaraController> {
             ? ListView(
                 padding: const EdgeInsets.all(10),
                 children: [
-                  if (controller.isAnyEmpty()) const Uncompleted(),
+                  if (controller.isShowExportBastUdara() == false ||
+                      controller.isShowExportSpu() == false)
+                    const Uncompleted(),
                   Card(
                     child: Container(
                       padding: const EdgeInsets.all(12),
@@ -527,17 +527,6 @@ void actionSpu() async {
   }
 }
 
-void actionEditSpu() async {
-  dynamic result = await Get.toNamed(Routes.spu,
-      arguments: DetailBastUdaraController.to.bastUdara.value);
-  if (result != null) {
-    DetailBastUdaraController.to.bastUdara.value = result as BastUdara;
-  } else {
-    DetailBastUdaraController.to.bastUdara.value =
-        DetailBastUdaraController.to.bastUdara.value;
-  }
-}
-
 void actionExport(context) {
   Get.bottomSheet(
     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -561,24 +550,24 @@ void actionExport(context) {
           ),
         ),
         const Divider(height: 0),
-        ListTile(
-          title: const Text("Berita Acara Serah Terima PMI"),
-          onTap: () {
-            Get.back();
-            Get.toNamed(
-              Routes.pdf,
-              arguments: {
-                "title": "Berita Acara Serah Terima PMI",
-                "stream_url":
-                    "${BaseClient.apiUrl}/api/pdf/bast-udara/${DetailBastUdaraController.to.bastUdara.value.id}?download=false",
-                "download_url":
-                    "${BaseClient.apiUrl}/api/pdf/bast-udara/${DetailBastUdaraController.to.bastUdara.value.id}?download=true"
-              },
-            );
-          },
-        ),
-        if (DetailBastUdaraController.to.bastUdara.value.spu != null &&
-            DetailBastUdaraController.to.bastUdara.value.terlaksana == 1)
+        if (DetailBastUdaraController.to.isShowExportBastUdara())
+          ListTile(
+            title: const Text("Berita Acara Serah Terima PMI"),
+            onTap: () {
+              Get.back();
+              Get.toNamed(
+                Routes.pdf,
+                arguments: {
+                  "title": "Berita Acara Serah Terima PMI",
+                  "stream_url":
+                      "${BaseClient.apiUrl}/api/pdf/bast-udara/${DetailBastUdaraController.to.bastUdara.value.id}?download=false",
+                  "download_url":
+                      "${BaseClient.apiUrl}/api/pdf/bast-udara/${DetailBastUdaraController.to.bastUdara.value.id}?download=true"
+                },
+              );
+            },
+          ),
+        if (DetailBastUdaraController.to.isShowExportSpu())
           ListTile(
             title: const Text("Surat Pengantar Udara"),
             onTap: () {

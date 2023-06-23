@@ -53,22 +53,22 @@ class PopupMenuAppBar extends GetView<DetailBastMakanController> {
     return PopupMenuButton(
       itemBuilder: (context) {
         return [
-          if (controller.isCanTerlaksana())
+          if (controller.isShowTerlaksana())
             const PopupMenuItem(
               value: "terlaksana",
               child: Text("Terlaksana"),
             ),
-          if (controller.isCanExport())
+          if (controller.isShowExport())
             const PopupMenuItem(
               value: "export",
               child: Text("Export"),
             ),
-          if (controller.isCanEdit())
+          if (controller.isShowEdit())
             const PopupMenuItem(
               value: "ubah",
               child: Text("Ubah"),
             ),
-          if (controller.isCanDelete())
+          if (controller.isShowDelete())
             const PopupMenuItem(
               value: "hapus",
               child: Text("Hapus"),
@@ -146,7 +146,9 @@ class DataPenyediaJasa extends GetView<DetailBastMakanController> {
         return ListView(
           padding: const EdgeInsets.all(10),
           children: [
-            if (controller.isAnyEmpty()) const Uncompleted(),
+            if (controller.isCompleteBastMakan() == false ||
+                controller.isCompleteMakan() == false)
+              const Uncompleted(),
             Card(
               child: Container(
                 padding: const EdgeInsets.all(12),
@@ -253,7 +255,9 @@ class DataPmi extends GetView<DetailBastMakanController> {
             ? ListView(
                 padding: const EdgeInsets.all(10),
                 children: [
-                  if (controller.isAnyEmpty()) const Uncompleted(),
+                  if (controller.isCompleteBastMakan() == false ||
+                      controller.isCompleteMakan() == false)
+                    const Uncompleted(),
                   ListView.builder(
                     shrinkWrap: true,
                     itemCount: controller.bastMakan.value.makan?.length,

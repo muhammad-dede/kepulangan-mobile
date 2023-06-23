@@ -26,36 +26,6 @@ class DetailBastPihakLainController extends GetxController
     super.onClose();
   }
 
-  bool isAnyEmpty() {
-    return bastPihakLain.value.fotoPihakKedua == null ||
-            bastPihakLain.value.fotoSerahTerima == null ||
-            bastPihakLain.value.jemputPihakLain!.isEmpty
-        ? true
-        : false;
-  }
-
-  bool isCanTerlaksana() {
-    return isAnyEmpty() == false && bastPihakLain.value.terlaksana == 0
-        ? true
-        : false;
-  }
-
-  bool isCanExport() {
-    return bastPihakLain.value.terlaksana == 1 ? true : false;
-  }
-
-  bool isCanEdit() {
-    return bastPihakLain.value.terlaksana == 0 || AuthService.to.isAdmin.isTrue
-        ? true
-        : false;
-  }
-
-  bool isCanDelete() {
-    return bastPihakLain.value.terlaksana == 0 || AuthService.to.isAdmin.isTrue
-        ? true
-        : false;
-  }
-
   Future<void> terlaksana() async {
     try {
       EasyLoading.show(
@@ -94,5 +64,43 @@ class DetailBastPihakLainController extends GetxController
     } finally {
       EasyLoading.dismiss();
     }
+  }
+
+  bool isCompleteBastPihakLain() {
+    return bastPihakLain.value.fotoPihakKedua != null &&
+            bastPihakLain.value.fotoSerahTerima != null
+        ? true
+        : false;
+  }
+
+  bool isCompleteJemputPihakLain() {
+    return bastPihakLain.value.jemputPihakLain!.isNotEmpty ? true : false;
+  }
+
+  bool isShowTerlaksana() {
+    return isCompleteBastPihakLain() == true &&
+            isCompleteJemputPihakLain() == true &&
+            bastPihakLain.value.terlaksana == 0
+        ? true
+        : false;
+  }
+
+  bool isShowExport() {
+    return isCompleteBastPihakLain() == true &&
+            isCompleteJemputPihakLain() == true
+        ? true
+        : false;
+  }
+
+  bool isShowEdit() {
+    return bastPihakLain.value.terlaksana == 0 || AuthService.to.isAdmin.isTrue
+        ? true
+        : false;
+  }
+
+  bool isShowDelete() {
+    return bastPihakLain.value.terlaksana == 0 || AuthService.to.isAdmin.isTrue
+        ? true
+        : false;
   }
 }
