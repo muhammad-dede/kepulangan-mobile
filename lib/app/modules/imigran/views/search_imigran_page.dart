@@ -497,11 +497,11 @@ void actionKepulangan(context, Imigran imigran) {
                 title: Text(kepulangan?.nama ?? ""),
                 onTap: () {
                   Get.back();
+                  Get.back();
                   Get.toNamed(Routes.kepulangan, arguments: [
                     {'imigran': imigran},
                     {'kepulangan': kepulangan},
                   ]);
-                  Get.back();
                 },
               );
             },
