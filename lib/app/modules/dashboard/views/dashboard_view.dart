@@ -140,7 +140,9 @@ class MenuArea extends GetView<DashboardController> {
                 ],
               ),
               onTap: () {
-                showLayanan(context, item);
+                if (item.layanan != null) {
+                  showLayanan(context, item);
+                }
               },
             );
           },
@@ -159,7 +161,7 @@ class MenuTotal extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     return Obx(
       () {
-        return GridView(
+        return GridView.builder(
           padding: const EdgeInsets.only(bottom: 10),
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -169,10 +171,12 @@ class MenuTotal extends GetView<DashboardController> {
             mainAxisSpacing: 10,
             childAspectRatio: 2.5 / 1.5,
           ),
-          children: [
-            GestureDetector(
+          itemCount: controller.listTotalLayanan.length,
+          itemBuilder: (context, index) {
+            final item = controller.listTotalLayanan[index];
+            return GestureDetector(
               onTap: () {
-                statistikDetail(1, "PMI");
+                statistikDetail(int.parse(item['id'].toString()), item['nama']);
               },
               child: Card(
                 child: Padding(
@@ -186,9 +190,7 @@ class MenuTotal extends GetView<DashboardController> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              controller.total.value.totalPmi == null
-                                  ? "0"
-                                  : controller.total.value.totalPmi.toString(),
+                              item['total'].toString(),
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -204,134 +206,13 @@ class MenuTotal extends GetView<DashboardController> {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      const Text('Total PMI'),
+                      Text('Total ${item['nama']}'),
                     ],
                   ),
                 ),
               ),
-            ),
-            GestureDetector(
-              onTap: () {
-                statistikDetail(5, "CPMI");
-              },
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              controller.total.value.totalCpmi == null
-                                  ? "0"
-                                  : controller.total.value.totalCpmi.toString(),
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                            ),
-                            const CircleAvatar(
-                              child: Icon(
-                                IconlyLight.document,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      const Text('Total CPMI'),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                statistikDetail(2, "ABK");
-              },
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              controller.total.value.totalAbk == null
-                                  ? "0"
-                                  : controller.total.value.totalAbk.toString(),
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                            ),
-                            const CircleAvatar(
-                              child: Icon(
-                                IconlyLight.document,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      const Text('Total ABK'),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                statistikDetail(6, "Jenazah");
-              },
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              controller.total.value.totalJenazah == null
-                                  ? "0"
-                                  : controller.total.value.totalJenazah
-                                      .toString(),
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                            ),
-                            const CircleAvatar(
-                              child: Icon(
-                                IconlyLight.document,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      const Text('Total Jenazah'),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
+            );
+          },
         );
       },
     );
@@ -361,7 +242,7 @@ class ChartJenisKelamin extends GetView<DashboardController> {
             ),
           ),
           FutureBuilder<List<Chart>>(
-            future: controller.getChartJenisKelamin(idLayanan),
+            future: controller.getTotalJenisKelamin(idLayanan),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState != ConnectionState.done) {
                 return SizedBox(
@@ -435,7 +316,7 @@ class ChartMasalah extends GetView<DashboardController> {
             ),
           ),
           FutureBuilder<List<Chart>>(
-            future: controller.getChartMasalah(idLayanan),
+            future: controller.getTotalMasalah(idLayanan),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState != ConnectionState.done) {
                 return SizedBox(
@@ -510,7 +391,7 @@ class ChartNegara extends GetView<DashboardController> {
             ),
           ),
           FutureBuilder<List<Chart>>(
-            future: controller.getChartNegara(idLayanan),
+            future: controller.getTotalNegara(idLayanan),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState != ConnectionState.done) {
                 return SizedBox(
@@ -584,7 +465,7 @@ class ChartProvinsi extends GetView<DashboardController> {
             ),
           ),
           FutureBuilder<List<Chart>>(
-            future: controller.getChartProvinsi(idLayanan),
+            future: controller.getTotalProvinsi(idLayanan),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState != ConnectionState.done) {
                 return SizedBox(
@@ -658,7 +539,7 @@ class ChartKabKota extends GetView<DashboardController> {
             ),
           ),
           FutureBuilder<List<Chart>>(
-            future: controller.getChartKabKota(idLayanan),
+            future: controller.getTotalKabKota(idLayanan),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState != ConnectionState.done) {
                 return SizedBox(

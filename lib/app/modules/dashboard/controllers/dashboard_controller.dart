@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:kepulangan/app/data/models/area.dart';
 import 'package:kepulangan/app/data/models/chart.dart';
-import 'package:kepulangan/app/data/models/total.dart';
 import 'package:kepulangan/app/modules/main/controllers/main_controller.dart';
 import 'package:kepulangan/app/services/auth_service.dart';
 import 'package:kepulangan/app/services/base_client.dart';
@@ -9,14 +8,24 @@ import 'package:kepulangan/app/services/base_client.dart';
 class DashboardController extends GetxController {
   static DashboardController get to => Get.find();
 
-  RxList<Area> listArea = <Area>[].obs;
-  RxList<Chart> listChart = <Chart>[].obs;
-  Rx<Total> total = Total().obs;
+  RxList<Area> listArea = <Area>[
+    Area(id: 1, nama: "Helpdesk"),
+    Area(id: 2, nama: "Lounge"),
+    Area(id: 3, nama: "Shelter"),
+    Area(id: 4, nama: "Cargo"),
+  ].obs;
+
+  RxList<Map<dynamic, dynamic>> listTotalLayanan = <Map<dynamic, dynamic>>[
+    {"id": 1, "nama": "PMI", "total": 0},
+    {"id": 2, "nama": "ABK", "total": 0},
+    {"id": 5, "nama": "CPMI", "total": 0},
+    {"id": 6, "nama": "Jenazah", "total": 0},
+  ].obs;
 
   @override
-  void onInit() async {
-    await getArea();
-    await getTotal();
+  void onInit() {
+    getArea();
+    getTotalLayanan();
     super.onInit();
   }
 
@@ -29,105 +38,114 @@ class DashboardController extends GetxController {
   }
 
   Future<void> refreshData() async {
-    await getArea();
     await AuthService.to.me();
-    await getTotal();
+    await getArea();
+    await getTotalLayanan();
   }
 
   Future<void> getArea() async {
     final response = await BaseClient().get("/api/referensi/area");
     response.fold((l) {
-      listArea.value = [];
+      listArea.value = listArea;
     }, (r) {
       List data = r['data'];
       listArea.value = data.map((e) => Area.fromJson(e)).toList();
     });
   }
 
-  Future<void> getTotal() async {
-    final response = await BaseClient().get("/api/dashboard/total");
+  Future<void> getTotalLayanan() async {
+    final response = await BaseClient().get("/api/dashboard/total/layanan");
     response.fold((l) {
-      total.value = Total();
+      listTotalLayanan.value = listTotalLayanan;
     }, (r) {
-      total.value = Total.fromJson(r['data']);
+      List data = r['data'];
+      for (var i = 0; i < listTotalLayanan.length; i++) {
+        listTotalLayanan[i] = data.firstWhere((item) =>
+            item['id'].toString() == listTotalLayanan[i]['id'].toString());
+      }
     });
   }
 
-  Future<List<Chart>> getChartJenisKelamin(int? idLayanan) async {
+  Future<List<Chart>> getTotalJenisKelamin(int? idLayanan) async {
     try {
+      List<Chart> listTotal = [];
       final response = await BaseClient()
-          .get("/api/dashboard/chart-jenis-kelamin/${idLayanan ?? ""}");
+          .get("/api/dashboard/total/jenis-kelamin/${idLayanan ?? ""}");
       response.fold((l) {
         throw (l.toString());
       }, (r) {
         List data = r['data'];
-        listChart.value = data.map((e) => Chart.fromJson(e)).toList();
+        listTotal = data.map((e) => Chart.fromJson(e)).toList();
       });
-      return listChart;
+      return listTotal;
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<List<Chart>> getChartMasalah(int? idLayanan) async {
+  Future<List<Chart>> getTotalMasalah(int? idLayanan) async {
     try {
+      List<Chart> listTotal = [];
       final response = await BaseClient()
-          .get("/api/dashboard/chart-masalah/${idLayanan ?? ""}");
+          .get("/api/dashboard/total/masalah/${idLayanan ?? ""}");
       response.fold((l) {
         throw (l.toString());
       }, (r) {
         List data = r['data'];
-        listChart.value = data.map((e) => Chart.fromJson(e)).toList();
+        listTotal = data.map((e) => Chart.fromJson(e)).toList();
       });
-      return listChart;
+      return listTotal;
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<List<Chart>> getChartNegara(int? idLayanan) async {
+  Future<List<Chart>> getTotalNegara(int? idLayanan) async {
     try {
+      List<Chart> listTotal = [];
       final response = await BaseClient()
-          .get("/api/dashboard/chart-negara/${idLayanan ?? ""}");
+          .get("/api/dashboard/total/negara/${idLayanan ?? ""}");
       response.fold((l) {
         throw (l.toString());
       }, (r) {
         List data = r['data'];
-        listChart.value = data.map((e) => Chart.fromJson(e)).toList();
+        listTotal = data.map((e) => Chart.fromJson(e)).toList();
       });
-      return listChart;
+      return listTotal;
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<List<Chart>> getChartProvinsi(int? idLayanan) async {
+  Future<List<Chart>> getTotalProvinsi(int? idLayanan) async {
     try {
+      List<Chart> listTotal = [];
       final response = await BaseClient()
-          .get("/api/dashboard/chart-provinsi/${idLayanan ?? ""}");
+          .get("/api/dashboard/total/provinsi/${idLayanan ?? ""}");
       response.fold((l) {
         throw (l.toString());
       }, (r) {
         List data = r['data'];
-        listChart.value = data.map((e) => Chart.fromJson(e)).toList();
+        listTotal = data.map((e) => Chart.fromJson(e)).toList();
       });
-      return listChart;
+      return listTotal;
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<List<Chart>> getChartKabKota(int? idLayanan) async {
+  Future<List<Chart>> getTotalKabKota(int? idLayanan) async {
     try {
+      List<Chart> listTotal = [];
       final response = await BaseClient()
-          .get("/api/dashboard/chart-kab-kota/${idLayanan ?? ""}");
+          .get("/api/dashboard/total/kab-kota/${idLayanan ?? ""}");
       response.fold((l) {
         throw (l.toString());
       }, (r) {
         List data = r['data'];
-        listChart.value = data.map((e) => Chart.fromJson(e)).toList();
+        listTotal = data.map((e) => Chart.fromJson(e)).toList();
       });
-      return listChart;
+      return listTotal;
     } catch (e) {
       rethrow;
     }
