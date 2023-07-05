@@ -167,9 +167,9 @@ class MenuTotal extends GetView<DashboardController> {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            childAspectRatio: 2.5 / 1.5,
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5,
+            childAspectRatio: 1 / 0.5,
           ),
           itemCount: controller.listTotalLayanan.length,
           itemBuilder: (context, index) {
@@ -180,7 +180,7 @@ class MenuTotal extends GetView<DashboardController> {
               },
               child: Card(
                 child: Padding(
-                  padding: const EdgeInsets.all(15),
+                  padding: const EdgeInsets.all(12),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

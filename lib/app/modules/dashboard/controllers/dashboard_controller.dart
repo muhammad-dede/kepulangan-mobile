@@ -18,6 +18,8 @@ class DashboardController extends GetxController {
   RxList<Map<dynamic, dynamic>> listTotalLayanan = <Map<dynamic, dynamic>>[
     {"id": 1, "nama": "PMI", "total": 0},
     {"id": 2, "nama": "ABK", "total": 0},
+    {"id": 3, "nama": "Sakit", "total": 0},
+    {"id": 4, "nama": "Anak", "total": 0},
     {"id": 5, "nama": "CPMI", "total": 0},
     {"id": 6, "nama": "Jenazah", "total": 0},
   ].obs;
