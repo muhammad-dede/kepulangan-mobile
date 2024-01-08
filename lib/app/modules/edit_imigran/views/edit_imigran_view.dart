@@ -101,7 +101,7 @@ class InputBrafaks extends GetView<EditImigranController> {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
       child: TextFormFieldWidget(
-        labelText: "Brafaks",
+        labelText: "No. Brafaks/No. Surat",
         readOnly: false,
         controller: controller.brafaksController,
         obscureText: false,

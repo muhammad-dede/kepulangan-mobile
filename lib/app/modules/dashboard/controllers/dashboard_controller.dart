@@ -24,6 +24,8 @@ class DashboardController extends GetxController {
     {"id": 6, "nama": "Jenazah", "total": 0},
   ].obs;
 
+  RxInt grandTotal = 0.obs;
+
   @override
   void onInit() {
     getArea();
@@ -65,6 +67,8 @@ class DashboardController extends GetxController {
         listTotalLayanan[i] = data.firstWhere((item) =>
             item['id'].toString() == listTotalLayanan[i]['id'].toString());
       }
+      grandTotal.value = listTotalLayanan.fold<int>(
+          0, (sum, item) => sum + int.parse(item['total']));
     });
   }
 

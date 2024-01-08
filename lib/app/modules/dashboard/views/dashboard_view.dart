@@ -41,27 +41,35 @@ class DashboardView extends GetView<DashboardController> {
               children: [
                 const Header(),
                 if (controller.listArea.isNotEmpty) const MenuArea(),
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Total Pelayanan PMI\nEmbarkasi dan Debarkasi\nBandara Soekarno Hatta\nBP3MI Banten",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 30),
+                        Text(
+                          "${controller.grandTotal.value}".toString(),
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 const MenuTotal(),
-                const ChartJenisKelamin(
-                  idLayanan: 1,
-                  namaLayanan: "Pmi",
-                ),
-                const ChartMasalah(
-                  idLayanan: 1,
-                  namaLayanan: "Pmi",
-                ),
-                const ChartNegara(
-                  idLayanan: 1,
-                  namaLayanan: "Pmi",
-                ),
-                const ChartProvinsi(
-                  idLayanan: 1,
-                  namaLayanan: "Pmi",
-                ),
-                const ChartKabKota(
-                  idLayanan: 1,
-                  namaLayanan: "Pmi",
-                ),
               ],
             ),
           ),
