@@ -3,10 +3,10 @@ import 'package:lottie/lottie.dart';
 
 class NoDataFoundWidget extends StatelessWidget {
   const NoDataFoundWidget({
-    Key? key,
+    super.key,
     this.text,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   final String? text;
   final void Function()? onPressed;

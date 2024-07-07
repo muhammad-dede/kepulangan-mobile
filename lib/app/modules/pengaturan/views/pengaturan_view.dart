@@ -11,7 +11,7 @@ import 'package:kepulangan/app/services/theme_service.dart';
 import '../controllers/pengaturan_controller.dart';
 
 class PengaturanView extends GetView<PengaturanController> {
-  const PengaturanView({Key? key}) : super(key: key);
+  const PengaturanView({super.key});
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -68,7 +68,7 @@ class Profil extends GetView<PengaturanController> {
                 border: Border.all(
                   color: Theme.of(context)
                       .colorScheme
-                      .onBackground
+                      .onSurface
                       .withOpacity(0.5),
                 ),
               ),

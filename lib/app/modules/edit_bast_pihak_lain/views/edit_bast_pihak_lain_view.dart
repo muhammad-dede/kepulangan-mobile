@@ -16,7 +16,7 @@ import 'package:kepulangan/app/widgets/text_form_field_widget.dart';
 import '../controllers/edit_bast_pihak_lain_controller.dart';
 
 class EditBastPihakLainView extends GetView<EditBastPihakLainController> {
-  const EditBastPihakLainView({Key? key}) : super(key: key);
+  const EditBastPihakLainView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +64,7 @@ class InputPihakKedua extends GetView<EditBastPihakLainController> {
           decoration: BoxDecoration(
             border: Border.all(
               color:
-                  Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
+                  Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
             ),
             borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
@@ -379,7 +379,7 @@ class InputImigran extends GetView<EditBastPihakLainController> {
           decoration: BoxDecoration(
             border: Border.all(
               color:
-                  Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
+                  Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
             ),
             borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),

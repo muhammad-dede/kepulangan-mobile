@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
   const TextFormFieldWidget({
-    Key? key,
+    super.key,
     this.labelText,
     this.hintText,
     this.prefixIcon,
@@ -17,7 +17,7 @@ class TextFormFieldWidget extends StatelessWidget {
     this.validator,
     this.onTap,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   final String? labelText;
   final String? hintText;

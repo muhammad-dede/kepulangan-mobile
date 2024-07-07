@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class ButtonWidget extends StatelessWidget {
   const ButtonWidget({
-    Key? key,
+    super.key,
     required this.labelButton,
     required this.backgroundColor,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   final String labelButton;
   final Color backgroundColor;

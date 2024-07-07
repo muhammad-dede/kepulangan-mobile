@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class DatePickerWidget extends StatelessWidget {
   const DatePickerWidget({
-    Key? key,
+    super.key,
     this.labelText,
     this.helperText,
     this.controller,
     this.autovalidateMode,
     this.validator,
     this.onTap,
-  }) : super(key: key);
+  });
 
   final String? labelText;
   final String? helperText;

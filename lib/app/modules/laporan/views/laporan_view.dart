@@ -9,7 +9,7 @@ import 'package:kepulangan/app/widgets/text_form_field_widget.dart';
 import '../controllers/laporan_controller.dart';
 
 class LaporanView extends GetView<LaporanController> {
-  const LaporanView({Key? key}) : super(key: key);
+  const LaporanView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

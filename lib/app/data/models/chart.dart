@@ -1,6 +1,6 @@
 class Chart {
   String? label;
-  int? value;
+  num? value;
 
   Chart({
     this.label,

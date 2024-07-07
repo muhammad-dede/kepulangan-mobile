@@ -7,7 +7,7 @@ import 'package:kepulangan/app/widgets/text_form_field_widget.dart';
 import '../controllers/edit_alamat_controller.dart';
 
 class EditAlamatView extends GetView<EditAlamatController> {
-  const EditAlamatView({Key? key}) : super(key: key);
+  const EditAlamatView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

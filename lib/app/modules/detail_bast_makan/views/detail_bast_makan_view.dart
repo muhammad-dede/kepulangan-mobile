@@ -15,7 +15,7 @@ import 'package:photo_view/photo_view.dart';
 import '../controllers/detail_bast_makan_controller.dart';
 
 class DetailBastMakanView extends GetView<DetailBastMakanController> {
-  const DetailBastMakanView({Key? key}) : super(key: key);
+  const DetailBastMakanView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -13,7 +13,7 @@ import 'package:kepulangan/app/widgets/no_data_found_widget.dart';
 import '../controllers/bast_pihak_lain_controller.dart';
 
 class BastPihakLainView extends GetView<BastPihakLainController> {
-  const BastPihakLainView({Key? key}) : super(key: key);
+  const BastPihakLainView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

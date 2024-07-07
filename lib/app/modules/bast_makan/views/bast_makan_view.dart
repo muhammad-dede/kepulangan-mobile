@@ -13,7 +13,7 @@ import 'package:kepulangan/app/widgets/no_data_found_widget.dart';
 import '../controllers/bast_makan_controller.dart';
 
 class BastMakanView extends GetView<BastMakanController> {
-  const BastMakanView({Key? key}) : super(key: key);
+  const BastMakanView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

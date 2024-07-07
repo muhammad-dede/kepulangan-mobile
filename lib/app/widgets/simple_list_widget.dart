@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class SimpleListWidget extends StatelessWidget {
   const SimpleListWidget({
-    Key? key,
+    super.key,
     this.onTap,
     this.leading,
     required this.title,
     required this.subtitle,
     this.trailing,
-  }) : super(key: key);
+  });
 
   final void Function()? onTap;
   final Widget? leading;

@@ -10,7 +10,7 @@ import '../controllers/alamat_controller.dart';
 import 'search_alamat_page.dart';
 
 class AlamatView extends GetView<AlamatController> {
-  const AlamatView({Key? key}) : super(key: key);
+  const AlamatView({super.key});
   @override
   Widget build(BuildContext context) {
     return Obx(

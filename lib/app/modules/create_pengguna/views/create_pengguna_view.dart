@@ -6,7 +6,7 @@ import 'package:kepulangan/app/widgets/text_form_field_widget.dart';
 import '../controllers/create_pengguna_controller.dart';
 
 class CreatePenggunaView extends GetView<CreatePenggunaController> {
-  const CreatePenggunaView({Key? key}) : super(key: key);
+  const CreatePenggunaView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

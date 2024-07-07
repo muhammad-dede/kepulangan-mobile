@@ -6,7 +6,7 @@ import 'package:kepulangan/app/widgets/text_form_field_widget.dart';
 import '../controllers/create_pihak_kedua_controller.dart';
 
 class CreatePihakKeduaView extends GetView<CreatePihakKeduaController> {
-  const CreatePihakKeduaView({Key? key}) : super(key: key);
+  const CreatePihakKeduaView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

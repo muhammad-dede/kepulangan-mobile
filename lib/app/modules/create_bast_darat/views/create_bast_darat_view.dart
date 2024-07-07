@@ -12,7 +12,7 @@ import 'package:kepulangan/app/widgets/text_form_field_widget.dart';
 import '../controllers/create_bast_darat_controller.dart';
 
 class CreateBastDaratView extends GetView<CreateBastDaratController> {
-  const CreateBastDaratView({Key? key}) : super(key: key);
+  const CreateBastDaratView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -497,7 +497,7 @@ class InputDarat extends GetView<CreateBastDaratController> {
           decoration: BoxDecoration(
             border: Border.all(
               color:
-                  Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
+                  Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
             ),
             borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),

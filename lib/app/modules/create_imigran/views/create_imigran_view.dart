@@ -12,7 +12,7 @@ import 'package:kepulangan/app/widgets/text_form_field_widget.dart';
 import '../controllers/create_imigran_controller.dart';
 
 class CreateImigranView extends GetView<CreateImigranController> {
-  const CreateImigranView({Key? key}) : super(key: key);
+  const CreateImigranView({super.key});
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CreateImigranController>(

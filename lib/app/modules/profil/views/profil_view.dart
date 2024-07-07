@@ -11,7 +11,7 @@ import 'package:kepulangan/app/widgets/text_form_field_widget.dart';
 import '../controllers/profil_controller.dart';
 
 class ProfilView extends GetView<ProfilController> {
-  const ProfilView({Key? key}) : super(key: key);
+  const ProfilView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +70,7 @@ class Avatar extends GetView<ProfilController> {
                       border: Border.all(
                         color: Theme.of(context)
                             .colorScheme
-                            .onBackground
+                            .onSurface
                             .withOpacity(0.5),
                       ),
                     ),

@@ -6,7 +6,7 @@ import 'package:kepulangan/app/widgets/text_form_field_widget.dart';
 import '../controllers/keamanan_controller.dart';
 
 class KeamananView extends GetView<KeamananController> {
-  const KeamananView({Key? key}) : super(key: key);
+  const KeamananView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -13,7 +13,7 @@ import 'package:photo_view/photo_view.dart';
 import '../controllers/detail_imigran_controller.dart';
 
 class DetailImigranView extends GetView<DetailImigranController> {
-  const DetailImigranView({Key? key}) : super(key: key);
+  const DetailImigranView({super.key});
   @override
   Widget build(BuildContext context) {
     return Obx(

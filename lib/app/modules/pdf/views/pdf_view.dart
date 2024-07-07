@@ -7,7 +7,7 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import '../controllers/pdf_controller.dart';
 
 class PdfView extends GetView<PdfController> {
-  const PdfView({Key? key}) : super(key: key);
+  const PdfView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

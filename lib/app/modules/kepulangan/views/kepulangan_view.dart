@@ -11,7 +11,7 @@ import 'package:kepulangan/app/modules/kepulangan/views/fotm_rujuk_rs_polri_page
 import '../controllers/kepulangan_controller.dart';
 
 class KepulanganView extends GetView<KepulanganController> {
-  const KepulanganView({Key? key}) : super(key: key);
+  const KepulanganView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

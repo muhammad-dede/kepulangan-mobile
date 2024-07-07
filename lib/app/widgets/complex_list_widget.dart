@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ComplexListWidget extends StatelessWidget {
   const ComplexListWidget({
-    Key? key,
+    super.key,
     this.headerLeftText,
     this.headerRightText,
     this.onTap,
@@ -12,7 +12,7 @@ class ComplexListWidget extends StatelessWidget {
     this.trailing,
     this.footerLeftText,
     this.footerRightText,
-  }) : super(key: key);
+  });
 
   final String? headerLeftText;
   final String? headerRightText;

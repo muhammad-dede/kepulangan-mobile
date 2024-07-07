@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 class ImagePickerWidget extends StatelessWidget {
   const ImagePickerWidget({
-    Key? key,
+    super.key,
     this.title,
     this.subtitle,
     this.imageFile,
@@ -15,7 +15,7 @@ class ImagePickerWidget extends StatelessWidget {
     this.onDelete,
     this.onTapCamera,
     this.onTapGalery,
-  }) : super(key: key);
+  });
 
   final String? title;
   final String? subtitle;
@@ -38,7 +38,7 @@ class ImagePickerWidget extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(10)),
             border: Border.all(
               color:
-                  Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
+                  Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
             ),
           ),
           child: imageFile != null

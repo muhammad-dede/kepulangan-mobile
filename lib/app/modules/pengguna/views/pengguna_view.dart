@@ -10,7 +10,7 @@ import '../controllers/pengguna_controller.dart';
 import 'search_pengguna_page.dart';
 
 class PenggunaView extends GetView<PenggunaController> {
-  const PenggunaView({Key? key}) : super(key: key);
+  const PenggunaView({super.key});
   @override
   Widget build(BuildContext context) {
     return Obx(

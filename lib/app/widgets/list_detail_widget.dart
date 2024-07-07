@@ -4,14 +4,14 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 class ListDetailWidget extends StatelessWidget {
   const ListDetailWidget({
-    Key? key,
+    super.key,
     this.imageUrl,
     this.title,
     this.subtitle,
     this.trailing,
     this.onTapImage,
     this.onTapListTile,
-  }) : super(key: key);
+  });
 
   final String? imageUrl;
   final String? title;
@@ -38,7 +38,7 @@ class ListDetailWidget extends StatelessWidget {
                   border: Border.all(
                     color: Theme.of(context)
                         .colorScheme
-                        .onBackground
+                        .onSurface
                         .withOpacity(0.5),
                   ),
                 ),

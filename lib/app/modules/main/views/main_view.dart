@@ -10,7 +10,7 @@ import 'package:kepulangan/app/modules/pengaturan/views/pengaturan_view.dart';
 import '../controllers/main_controller.dart';
 
 class MainView extends GetView<MainController> {
-  const MainView({Key? key}) : super(key: key);
+  const MainView({super.key});
   @override
   Widget build(BuildContext context) {
     return Obx(

@@ -10,7 +10,7 @@ import '../controllers/penyedia_jasa_controller.dart';
 import 'search_penyedia_jasa_page.dart';
 
 class PenyediaJasaView extends GetView<PenyediaJasaController> {
-  const PenyediaJasaView({Key? key}) : super(key: key);
+  const PenyediaJasaView({super.key});
   @override
   Widget build(BuildContext context) {
     return Obx(

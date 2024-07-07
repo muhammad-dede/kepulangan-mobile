@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class SwitchWidget extends StatelessWidget {
   const SwitchWidget({
-    Key? key,
+    super.key,
     required this.labelText,
     required this.value,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   final String labelText;
   final bool value;

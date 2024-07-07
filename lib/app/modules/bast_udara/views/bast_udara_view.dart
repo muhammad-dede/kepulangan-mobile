@@ -13,7 +13,7 @@ import 'package:kepulangan/app/widgets/no_data_found_widget.dart';
 import '../controllers/bast_udara_controller.dart';
 
 class BastUdaraView extends GetView<BastUdaraController> {
-  const BastUdaraView({Key? key}) : super(key: key);
+  const BastUdaraView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

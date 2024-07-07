@@ -6,7 +6,7 @@ import 'package:kepulangan/app/widgets/text_form_field_widget.dart';
 import '../controllers/create_penyedia_jasa_controller.dart';
 
 class CreatePenyediaJasaView extends GetView<CreatePenyediaJasaController> {
-  const CreatePenyediaJasaView({Key? key}) : super(key: key);
+  const CreatePenyediaJasaView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

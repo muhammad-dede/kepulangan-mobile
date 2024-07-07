@@ -7,7 +7,7 @@ import 'package:lottie/lottie.dart';
 import '../controllers/introduction_controller.dart';
 
 class IntroductionView extends GetView<IntroductionController> {
-  const IntroductionView({Key? key}) : super(key: key);
+  const IntroductionView({super.key});
   @override
   Widget build(BuildContext context) {
     const pageDecoration = PageDecoration(

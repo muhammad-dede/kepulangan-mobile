@@ -66,7 +66,7 @@ class InputBastUdara extends GetView<KepulanganController> {
           decoration: BoxDecoration(
             border: Border.all(
               color:
-                  Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
+                  Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
             ),
             borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),

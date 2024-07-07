@@ -14,7 +14,7 @@ import 'package:kepulangan/app/widgets/text_form_field_widget.dart';
 import '../controllers/spu_controller.dart';
 
 class SpuView extends GetView<SpuController> {
-  const SpuView({Key? key}) : super(key: key);
+  const SpuView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -344,7 +344,7 @@ class InputSpuTiket extends GetView<SpuController> {
           decoration: BoxDecoration(
             border: Border.all(
               color:
-                  Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
+                  Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
             ),
             borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
@@ -467,7 +467,7 @@ class FotoTiket extends GetView<SpuController> {
                       border: Border.all(
                         color: Theme.of(context)
                             .colorScheme
-                            .onBackground
+                            .onSurface
                             .withOpacity(0.5),
                       ),
                     ),

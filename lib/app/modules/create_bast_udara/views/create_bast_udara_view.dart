@@ -12,7 +12,7 @@ import 'package:kepulangan/app/widgets/text_form_field_widget.dart';
 import '../controllers/create_bast_udara_controller.dart';
 
 class CreateBastUdaraView extends GetView<CreateBastUdaraController> {
-  const CreateBastUdaraView({Key? key}) : super(key: key);
+  const CreateBastUdaraView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -497,7 +497,7 @@ class InputUdara extends GetView<CreateBastUdaraController> {
           decoration: BoxDecoration(
             border: Border.all(
               color:
-                  Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
+                  Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
             ),
             borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),

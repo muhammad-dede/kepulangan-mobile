@@ -14,7 +14,7 @@ import '../controllers/imigran_controller.dart';
 import 'search_imigran_page.dart';
 
 class ImigranView extends GetView<ImigranController> {
-  const ImigranView({Key? key}) : super(key: key);
+  const ImigranView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,7 +122,7 @@ class MenuArea extends GetView<ImigranController> {
 // }
 
 class ListData extends GetView<ImigranController> {
-  const ListData({Key? key}) : super(key: key);
+  const ListData({super.key});
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(

@@ -17,18 +17,18 @@ class PdfController extends GetxController {
 
   @override
   void onInit() {
-    IsolateNameServer.registerPortWithName(
-        receivePort.sendPort, 'downloader_send_port');
-    receivePort.listen((dynamic data) {
-      DownloadTaskStatus status = DownloadTaskStatus(data[1]);
+    // IsolateNameServer.registerPortWithName(
+    //     receivePort.sendPort, 'downloader_send_port');
+    // receivePort.listen((dynamic data) {
+    //   DownloadTaskStatus status = DownloadTaskStatus(data[1]);
 
-      if (status == DownloadTaskStatus.complete) {
-        EasyLoading.showSuccess("Berhasil mengunduh");
-      }
-      if (status == DownloadTaskStatus.failed) {
-        EasyLoading.showError("Gagal mengunduh");
-      }
-    });
+    //   if (status == DownloadTaskStatus.complete) {
+    //     EasyLoading.showSuccess("Berhasil mengunduh");
+    //   }
+    //   if (status == DownloadTaskStatus.failed) {
+    //     EasyLoading.showError("Gagal mengunduh");
+    //   }
+    // });
     FlutterDownloader.registerCallback(downloadCallback);
     super.onInit();
   }

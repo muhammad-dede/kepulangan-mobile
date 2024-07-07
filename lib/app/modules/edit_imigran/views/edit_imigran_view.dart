@@ -12,7 +12,7 @@ import 'package:kepulangan/app/widgets/text_form_field_widget.dart';
 import '../controllers/edit_imigran_controller.dart';
 
 class EditImigranView extends GetView<EditImigranController> {
-  const EditImigranView({Key? key}) : super(key: key);
+  const EditImigranView({super.key});
   @override
   Widget build(BuildContext context) {
     return GetBuilder<EditImigranController>(

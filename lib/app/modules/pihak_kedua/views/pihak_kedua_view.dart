@@ -10,7 +10,7 @@ import '../controllers/pihak_kedua_controller.dart';
 import 'search_pihak_kedua_page.dart';
 
 class PihakKeduaView extends GetView<PihakKeduaController> {
-  const PihakKeduaView({Key? key}) : super(key: key);
+  const PihakKeduaView({super.key});
   @override
   Widget build(BuildContext context) {
     return Obx(

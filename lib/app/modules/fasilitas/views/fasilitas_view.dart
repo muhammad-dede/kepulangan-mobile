@@ -14,7 +14,7 @@ import 'package:kepulangan/app/routes/app_pages.dart';
 import '../controllers/fasilitas_controller.dart';
 
 class FasilitasView extends GetView<FasilitasController> {
-  const FasilitasView({Key? key}) : super(key: key);
+  const FasilitasView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

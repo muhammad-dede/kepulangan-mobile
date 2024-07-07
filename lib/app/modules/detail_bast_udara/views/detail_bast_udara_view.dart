@@ -15,7 +15,7 @@ import 'package:photo_view/photo_view.dart';
 import '../controllers/detail_bast_udara_controller.dart';
 
 class DetailBastUdaraView extends GetView<DetailBastUdaraController> {
-  const DetailBastUdaraView({Key? key}) : super(key: key);
+  const DetailBastUdaraView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -462,7 +462,7 @@ class FotoTiket extends GetView<DetailBastUdaraController> {
               borderRadius: const BorderRadius.all(Radius.circular(10)),
               border: Border.all(
                 color:
-                    Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
+                    Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
               ),
             ),
             child: CachedNetworkImage(

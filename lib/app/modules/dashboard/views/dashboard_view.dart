@@ -13,7 +13,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import '../controllers/dashboard_controller.dart';
 
 class DashboardView extends GetView<DashboardController> {
-  const DashboardView({Key? key}) : super(key: key);
+  const DashboardView({super.key});
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -269,18 +269,18 @@ class ChartJenisKelamin extends GetView<DashboardController> {
               if (snapshot.hasData) {
                 return SfCartesianChart(
                   series: [
-                    ColumnSeries(
+                    ColumnSeries<Chart, String>(
                       dataSource: snapshot.data,
                       xValueMapper: (Chart data, _) => data.label,
                       yValueMapper: (Chart data, _) => data.value,
                       dataLabelSettings:
                           const DataLabelSettings(isVisible: true),
-                      emptyPointSettings:
-                          EmptyPointSettings(mode: EmptyPointMode.average),
+                      emptyPointSettings: const EmptyPointSettings(
+                          mode: EmptyPointMode.average),
                     ),
                   ],
                   tooltipBehavior: TooltipBehavior(enable: true),
-                  primaryXAxis: CategoryAxis(
+                  primaryXAxis: const CategoryAxis(
                     autoScrollingMode: AutoScrollingMode.start,
                     autoScrollingDelta: 2,
                   ),
@@ -343,18 +343,18 @@ class ChartMasalah extends GetView<DashboardController> {
               if (snapshot.hasData) {
                 return SfCartesianChart(
                   series: [
-                    ColumnSeries(
+                    ColumnSeries<Chart, String>(
                       dataSource: snapshot.data,
                       xValueMapper: (Chart data, _) => data.label,
                       yValueMapper: (Chart data, _) => data.value,
                       dataLabelSettings:
                           const DataLabelSettings(isVisible: true),
-                      emptyPointSettings:
-                          EmptyPointSettings(mode: EmptyPointMode.average),
+                      emptyPointSettings: const EmptyPointSettings(
+                          mode: EmptyPointMode.average),
                     ),
                   ],
                   tooltipBehavior: TooltipBehavior(enable: true),
-                  primaryXAxis: CategoryAxis(
+                  primaryXAxis: const CategoryAxis(
                     autoScrollingMode: AutoScrollingMode.start,
                     autoScrollingDelta: 4,
                   ),
@@ -418,18 +418,18 @@ class ChartNegara extends GetView<DashboardController> {
               if (snapshot.hasData) {
                 return SfCartesianChart(
                   series: [
-                    ColumnSeries(
+                    ColumnSeries<Chart, String>(
                       dataSource: snapshot.data,
                       xValueMapper: (Chart data, _) => data.label,
                       yValueMapper: (Chart data, _) => data.value,
                       dataLabelSettings:
                           const DataLabelSettings(isVisible: true),
-                      emptyPointSettings:
-                          EmptyPointSettings(mode: EmptyPointMode.average),
+                      emptyPointSettings: const EmptyPointSettings(
+                          mode: EmptyPointMode.average),
                     ),
                   ],
                   tooltipBehavior: TooltipBehavior(enable: true),
-                  primaryXAxis: CategoryAxis(
+                  primaryXAxis: const CategoryAxis(
                     autoScrollingMode: AutoScrollingMode.start,
                     autoScrollingDelta: 4,
                   ),
@@ -492,18 +492,18 @@ class ChartProvinsi extends GetView<DashboardController> {
               if (snapshot.hasData) {
                 return SfCartesianChart(
                   series: [
-                    ColumnSeries(
+                    ColumnSeries<Chart, String>(
                       dataSource: snapshot.data,
                       xValueMapper: (Chart data, _) => data.label,
                       yValueMapper: (Chart data, _) => data.value,
                       dataLabelSettings:
                           const DataLabelSettings(isVisible: true),
-                      emptyPointSettings:
-                          EmptyPointSettings(mode: EmptyPointMode.average),
+                      emptyPointSettings: const EmptyPointSettings(
+                          mode: EmptyPointMode.average),
                     ),
                   ],
                   tooltipBehavior: TooltipBehavior(enable: true),
-                  primaryXAxis: CategoryAxis(
+                  primaryXAxis: const CategoryAxis(
                     autoScrollingMode: AutoScrollingMode.start,
                     autoScrollingDelta: 4,
                   ),
@@ -566,18 +566,18 @@ class ChartKabKota extends GetView<DashboardController> {
               if (snapshot.hasData) {
                 return SfCartesianChart(
                   series: [
-                    ColumnSeries(
+                    ColumnSeries<Chart, String>(
                       dataSource: snapshot.data,
                       xValueMapper: (Chart data, _) => data.label,
                       yValueMapper: (Chart data, _) => data.value,
                       dataLabelSettings:
                           const DataLabelSettings(isVisible: true),
-                      emptyPointSettings:
-                          EmptyPointSettings(mode: EmptyPointMode.average),
+                      emptyPointSettings: const EmptyPointSettings(
+                          mode: EmptyPointMode.average),
                     ),
                   ],
                   tooltipBehavior: TooltipBehavior(enable: true),
-                  primaryXAxis: CategoryAxis(
+                  primaryXAxis: const CategoryAxis(
                     autoScrollingMode: AutoScrollingMode.start,
                     autoScrollingDelta: 4,
                   ),
