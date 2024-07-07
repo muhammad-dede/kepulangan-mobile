@@ -4,7 +4,8 @@ import 'package:kepulangan/app/routes/app_pages.dart';
 import 'package:kepulangan/app/services/storage_service.dart';
 
 class AuthMiddleware extends GetMiddleware {
-  AuthMiddleware({priority}) : super(priority: priority);
+  // AuthMiddleware({priority}) : super(priority: priority);
+  AuthMiddleware({super.priority});
 
   final StorageService storage = Get.find();
 
