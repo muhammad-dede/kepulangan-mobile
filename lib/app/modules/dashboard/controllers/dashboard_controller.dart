@@ -68,7 +68,7 @@ class DashboardController extends GetxController {
             item['id'].toString() == listTotalLayanan[i]['id'].toString());
       }
       grandTotal.value = listTotalLayanan.fold<int>(
-          0, (sum, item) => sum + int.parse(item['total']));
+          0, (sum, item) => sum + int.parse(item['total'].toString()));
     });
   }
 

@@ -7,8 +7,8 @@ import 'package:http/http.dart' as http;
 import 'package:kepulangan/app/services/storage_service.dart';
 
 class BaseClient {
-  // static const String apiUrl = 'http://192.168.18.3/kepulangan/public';
-  static const String apiUrl = 'https://kepulanganbp3mibanten.site/public';
+  static const String apiUrl = 'http://10.0.2.2:8000';
+  // static const String apiUrl = 'https://kepulanganbp3mibanten.site/public';
   static const int timeOutDuration = 30;
 
   //----------------------GET----------------------
