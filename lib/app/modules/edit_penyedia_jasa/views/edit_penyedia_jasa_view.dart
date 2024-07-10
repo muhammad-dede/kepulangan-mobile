@@ -32,6 +32,10 @@ class EditPenyediaJasaView extends GetView<EditPenyediaJasaController> {
             Email(),
             NoTelp(),
             Up(),
+            NoPks(),
+            TahunPks(),
+            NoDiva(),
+            TahunDiva(),
           ],
         ),
       ),
@@ -134,6 +138,86 @@ class Up extends GetView<EditPenyediaJasaController> {
         labelText: "Up",
         readOnly: false,
         controller: controller.upController,
+        obscureText: false,
+        keyboardType: TextInputType.text,
+      ),
+    );
+  }
+}
+
+class NoPks extends GetView<EditPenyediaJasaController> {
+  const NoPks({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      child: TextFormFieldWidget(
+        labelText: "No Pks",
+        readOnly: false,
+        controller: controller.noPksController,
+        obscureText: false,
+        keyboardType: TextInputType.text,
+      ),
+    );
+  }
+}
+
+class TahunPks extends GetView<EditPenyediaJasaController> {
+  const TahunPks({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      child: TextFormFieldWidget(
+        labelText: "Tahun Pks",
+        readOnly: false,
+        controller: controller.tahunPksController,
+        obscureText: false,
+        keyboardType: TextInputType.text,
+      ),
+    );
+  }
+}
+
+class NoDiva extends GetView<EditPenyediaJasaController> {
+  const NoDiva({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      child: TextFormFieldWidget(
+        labelText: "No Diva",
+        readOnly: false,
+        controller: controller.noDivaController,
+        obscureText: false,
+        keyboardType: TextInputType.text,
+      ),
+    );
+  }
+}
+
+class TahunDiva extends GetView<EditPenyediaJasaController> {
+  const TahunDiva({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      child: TextFormFieldWidget(
+        labelText: "Tahun Diva",
+        readOnly: false,
+        controller: controller.tahunDivaController,
         obscureText: false,
         keyboardType: TextInputType.text,
       ),

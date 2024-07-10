@@ -11,6 +11,10 @@ class CreatePenyediaJasaController extends GetxController {
   final emailController = TextEditingController();
   final noTelpController = TextEditingController();
   final upController = TextEditingController();
+  final noPksController = TextEditingController();
+  final tahunPksController = TextEditingController();
+  final noDivaController = TextEditingController();
+  final tahunDivaController = TextEditingController();
 
   @override
   void onClose() {
@@ -19,6 +23,10 @@ class CreatePenyediaJasaController extends GetxController {
     emailController.dispose();
     noTelpController.dispose();
     upController.dispose();
+    noPksController.dispose();
+    tahunPksController.dispose();
+    noDivaController.dispose();
+    tahunDivaController.dispose();
     super.onClose();
   }
 
@@ -40,6 +48,10 @@ class CreatePenyediaJasaController extends GetxController {
           'email': emailController.text,
           'no_telp': noTelpController.text,
           'up': upController.text,
+          'no_pks': noPksController.text,
+          'tahun_pks': tahunPksController.text,
+          'no_diva': noDivaController.text,
+          'tahun_diva': tahunDivaController.text,
         });
         response.fold((l) {
           EasyLoading.showError(l.toString());

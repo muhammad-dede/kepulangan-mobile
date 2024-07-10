@@ -5,6 +5,10 @@ class PenyediaJasa {
   String? email;
   String? noTelp;
   String? up;
+  String? noPks;
+  String? tahunPks;
+  String? noDiva;
+  String? tahunDiva;
 
   PenyediaJasa({
     this.id,
@@ -13,6 +17,10 @@ class PenyediaJasa {
     this.email,
     this.noTelp,
     this.up,
+    this.noPks,
+    this.tahunPks,
+    this.noDiva,
+    this.tahunDiva,
   });
 
   PenyediaJasa.fromJson(Map<String, dynamic> json) {
@@ -22,6 +30,10 @@ class PenyediaJasa {
     email = json['email'];
     noTelp = json['no_telp'];
     up = json['up'];
+    noPks = json['no_pks'];
+    tahunPks = json['tahun_pks'];
+    noDiva = json['no_diva'];
+    tahunDiva = json['tahun_diva'];
   }
 
   Map<String, dynamic> toJson() {
@@ -32,6 +44,10 @@ class PenyediaJasa {
     data['email'] = email;
     data['no_telp'] = noTelp;
     data['up'] = up;
+    data['no_pks'] = noPks;
+    data['tahun_pks'] = tahunPks;
+    data['no_diva'] = noDiva;
+    data['tahun_diva'] = tahunDiva;
     return data;
   }
 }
