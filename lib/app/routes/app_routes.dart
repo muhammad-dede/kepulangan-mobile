@@ -48,6 +48,9 @@ abstract class Routes {
   static const penyediaJasa = _Paths.penyediaJasa;
   static const createPenyediaJasa = _Paths.createPenyediaJasa;
   static const editPenyediaJasa = _Paths.editPenyediaJasa;
+  static const koordinator = _Paths.koordinator;
+  static const createKoordinator = _Paths.createKoordinator;
+  static const editKoordinator = _Paths.editKoordinator;
   static const pengguna = _Paths.pengguna;
   static const createPengguna = _Paths.createPengguna;
   static const editPengguna = _Paths.editPengguna;
@@ -103,6 +106,9 @@ abstract class _Paths {
   static const penyediaJasa = '/penyedia-jasa';
   static const createPenyediaJasa = '/create-penyedia-jasa';
   static const editPenyediaJasa = '/edit-penyedia-jasa';
+  static const koordinator = '/koordinator';
+  static const createKoordinator = '/create-koordinator';
+  static const editKoordinator = '/edit-koordinator';
   static const pengguna = '/pengguna';
   static const createPengguna = '/create-pengguna';
   static const editPengguna = '/edit-pengguna';

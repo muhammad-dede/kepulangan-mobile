@@ -1,4 +1,10 @@
 import 'package:get/get.dart';
+import 'package:kepulangan/app/modules/create_koordinator/bindings/create_koordinator_binding.dart';
+import 'package:kepulangan/app/modules/create_koordinator/views/create_koordinator_view.dart';
+import 'package:kepulangan/app/modules/edit_koordinator/bindings/edit_koordinator_binding.dart';
+import 'package:kepulangan/app/modules/edit_koordinator/views/edit_koordinator_view.dart';
+import 'package:kepulangan/app/modules/koordinator/bindings/koordinator_binding.dart';
+import 'package:kepulangan/app/modules/koordinator/views/koordinator_view.dart';
 
 import '../middlewares/auth_middleware.dart';
 import '../middlewares/introduction_middleware.dart';
@@ -427,6 +433,33 @@ class AppPages {
       name: _Paths.editPenyediaJasa,
       page: () => const EditPenyediaJasaView(),
       binding: EditPenyediaJasaBinding(),
+      middlewares: [
+        IntroductionMiddleware(priority: 0),
+        AuthMiddleware(priority: 1)
+      ],
+    ),
+    GetPage(
+      name: _Paths.koordinator,
+      page: () => const KoordinatorView(),
+      binding: KoordinatorBinding(),
+      middlewares: [
+        IntroductionMiddleware(priority: 0),
+        AuthMiddleware(priority: 1)
+      ],
+    ),
+    GetPage(
+      name: _Paths.createKoordinator,
+      page: () => const CreateKoordinatorView(),
+      binding: CreateKoordinatorBinding(),
+      middlewares: [
+        IntroductionMiddleware(priority: 0),
+        AuthMiddleware(priority: 1)
+      ],
+    ),
+    GetPage(
+      name: _Paths.editKoordinator,
+      page: () => const EditKoordinatorView(),
+      binding: EditKoordinatorBinding(),
       middlewares: [
         IntroductionMiddleware(priority: 0),
         AuthMiddleware(priority: 1)

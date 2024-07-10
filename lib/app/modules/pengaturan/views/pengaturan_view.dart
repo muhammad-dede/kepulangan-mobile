@@ -38,6 +38,7 @@ class PengaturanView extends GetView<PengaturanController> {
             const PihakKedua(),
             const Alamat(),
             const PenyediaJasa(),
+            if (AuthService.to.isAdmin.isTrue) const Koordinator(),
             if (AuthService.to.isAdmin.isTrue) const Pengguna(),
             const Keamanan(),
             const Logout(),
@@ -66,10 +67,8 @@ class Profil extends GetView<PengaturanController> {
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(100)),
                 border: Border.all(
-                  color: Theme.of(context)
-                      .colorScheme
-                      .onSurface
-                      .withOpacity(0.5),
+                  color:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
                 ),
               ),
               child: CachedNetworkImage(
@@ -256,6 +255,50 @@ class PenyediaJasa extends GetView<PengaturanController> {
         ),
         onTap: () {
           Get.toNamed(Routes.penyediaJasa);
+        },
+      ),
+    );
+  }
+}
+
+class Koordinator extends GetView<PengaturanController> {
+  const Koordinator({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      child: ListTile(
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(color: Colors.grey),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        leading: CircleAvatar(
+          backgroundColor: Colors.blueGrey.withOpacity(0.1),
+          child: const Icon(
+            IconlyBold.profile,
+            color: Colors.blueGrey,
+          ),
+        ),
+        title: const Text('Koordinator'),
+        subtitle: const Text('Manajemen Koordinator'),
+        trailing: Container(
+          width: 30,
+          height: 30,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100),
+            color: Colors.grey.withOpacity(0.1),
+          ),
+          child: const Icon(
+            Icons.arrow_forward_ios,
+            size: 18,
+            color: Colors.grey,
+          ),
+        ),
+        onTap: () {
+          Get.toNamed(Routes.koordinator);
         },
       ),
     );
