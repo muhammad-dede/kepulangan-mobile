@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:kepulangan/app/data/models/penyedia_jasa.dart';
 import 'package:kepulangan/app/services/base_client.dart';
 
@@ -12,9 +13,12 @@ class CreatePenyediaJasaController extends GetxController {
   final noTelpController = TextEditingController();
   final upController = TextEditingController();
   final noPksController = TextEditingController();
-  final tahunPksController = TextEditingController();
-  final noDivaController = TextEditingController();
-  final tahunDivaController = TextEditingController();
+  final tanggalPksController = TextEditingController();
+  final noDipaController = TextEditingController();
+  final tanggalDipaController = TextEditingController();
+
+  DateTime? tanggalPks;
+  DateTime? tanggalDipa;
 
   @override
   void onClose() {
@@ -24,9 +28,9 @@ class CreatePenyediaJasaController extends GetxController {
     noTelpController.dispose();
     upController.dispose();
     noPksController.dispose();
-    tahunPksController.dispose();
-    noDivaController.dispose();
-    tahunDivaController.dispose();
+    tanggalPksController.dispose();
+    noDipaController.dispose();
+    tanggalDipaController.dispose();
     super.onClose();
   }
 
@@ -49,9 +53,9 @@ class CreatePenyediaJasaController extends GetxController {
           'no_telp': noTelpController.text,
           'up': upController.text,
           'no_pks': noPksController.text,
-          'tahun_pks': tahunPksController.text,
-          'no_diva': noDivaController.text,
-          'tahun_diva': tahunDivaController.text,
+          'tanggal_pks': DateFormat('yyyy-MM-dd').format(tanggalPks!),
+          'no_dipa': noDipaController.text,
+          'tanggal_dipa': DateFormat('yyyy-MM-dd').format(tanggalDipa!),
         });
         response.fold((l) {
           EasyLoading.showError(l.toString());

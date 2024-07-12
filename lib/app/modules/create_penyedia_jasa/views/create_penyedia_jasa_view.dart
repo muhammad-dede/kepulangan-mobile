@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:kepulangan/app/widgets/date_picker_widget.dart';
 import 'package:kepulangan/app/widgets/text_form_field_widget.dart';
 
 import '../controllers/create_penyedia_jasa_controller.dart';
@@ -33,9 +35,9 @@ class CreatePenyediaJasaView extends GetView<CreatePenyediaJasaController> {
             NoTelp(),
             Up(),
             NoPks(),
-            TahunPks(),
-            NoDiva(),
-            TahunDiva(),
+            TanggalPks(),
+            NoDipa(),
+            TanggalDipa(),
           ],
         ),
       ),
@@ -155,7 +157,7 @@ class NoPks extends GetView<CreatePenyediaJasaController> {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
       child: TextFormFieldWidget(
-        labelText: "No Pks",
+        labelText: "No PKS",
         readOnly: false,
         controller: controller.noPksController,
         obscureText: false,
@@ -165,8 +167,38 @@ class NoPks extends GetView<CreatePenyediaJasaController> {
   }
 }
 
-class TahunPks extends GetView<CreatePenyediaJasaController> {
-  const TahunPks({
+class TanggalPks extends GetView<CreatePenyediaJasaController> {
+  const TanggalPks({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      child: DatePickerWidget(
+        labelText: "Tanggal PKS",
+        controller: controller.tanggalPksController,
+        onTap: () async {
+          DateTime? datePicker = await showDatePicker(
+            context: Get.context!,
+            initialDate: controller.tanggalPks ?? DateTime.now(),
+            firstDate: DateTime(1945),
+            lastDate: DateTime(DateTime.now().year + 1),
+          );
+          if (datePicker != null) {
+            controller.tanggalPks = datePicker;
+            controller.tanggalPksController.text =
+                DateFormat('dd-MM-yyyy').format(datePicker).toString();
+          }
+        },
+      ),
+    );
+  }
+}
+
+class NoDipa extends GetView<CreatePenyediaJasaController> {
+  const NoDipa({
     super.key,
   });
 
@@ -175,9 +207,9 @@ class TahunPks extends GetView<CreatePenyediaJasaController> {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
       child: TextFormFieldWidget(
-        labelText: "Tahun Pks",
+        labelText: "No DIPA",
         readOnly: false,
-        controller: controller.tahunPksController,
+        controller: controller.noDipaController,
         obscureText: false,
         keyboardType: TextInputType.text,
       ),
@@ -185,8 +217,8 @@ class TahunPks extends GetView<CreatePenyediaJasaController> {
   }
 }
 
-class NoDiva extends GetView<CreatePenyediaJasaController> {
-  const NoDiva({
+class TanggalDipa extends GetView<CreatePenyediaJasaController> {
+  const TanggalDipa({
     super.key,
   });
 
@@ -194,32 +226,22 @@ class NoDiva extends GetView<CreatePenyediaJasaController> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
-      child: TextFormFieldWidget(
-        labelText: "No Diva",
-        readOnly: false,
-        controller: controller.noDivaController,
-        obscureText: false,
-        keyboardType: TextInputType.text,
-      ),
-    );
-  }
-}
-
-class TahunDiva extends GetView<CreatePenyediaJasaController> {
-  const TahunDiva({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      child: TextFormFieldWidget(
-        labelText: "Tahun Diva",
-        readOnly: false,
-        controller: controller.tahunDivaController,
-        obscureText: false,
-        keyboardType: TextInputType.text,
+      child: DatePickerWidget(
+        labelText: "Tanggal DIPA",
+        controller: controller.tanggalDipaController,
+        onTap: () async {
+          DateTime? datePicker = await showDatePicker(
+            context: Get.context!,
+            initialDate: controller.tanggalDipa ?? DateTime.now(),
+            firstDate: DateTime(1945),
+            lastDate: DateTime(DateTime.now().year + 1),
+          );
+          if (datePicker != null) {
+            controller.tanggalDipa = datePicker;
+            controller.tanggalDipaController.text =
+                DateFormat('dd-MM-yyyy').format(datePicker).toString();
+          }
+        },
       ),
     );
   }
