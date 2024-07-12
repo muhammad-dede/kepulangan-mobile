@@ -28,7 +28,6 @@ class PenyediaJasaController extends GetxController {
   Future<void> getData() async {
     final response = await BaseClient().get("/api/penyedia-jasa");
     response.fold((l) {
-      print(l.toString());
       listPenyediaJasa.value = [];
     }, (r) {
       List data = r['data'];
