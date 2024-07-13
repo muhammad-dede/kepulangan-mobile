@@ -20,14 +20,20 @@ class DashboardView extends GetView<DashboardController> {
       () {
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Dashboard'),
+            title: Text(
+              AuthService.to.auth.value.nama ?? "User",
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
             actions: [
               IconButton(
                 onPressed: () {
                   Get.toNamed(Routes.profil);
                 },
                 icon: const CircleAvatar(
-                  child: Icon(Icons.person_4_outlined),
+                  child: Icon(IconlyBold.profile),
                 ),
               ),
             ],
@@ -39,38 +45,10 @@ class DashboardView extends GetView<DashboardController> {
             child: ListView(
               padding: const EdgeInsets.all(10),
               children: [
-                const Header(),
-                if (controller.listArea.isNotEmpty) const MenuArea(),
-                const Overview(),
-                Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Total Pelayanan PMI\nEmbarkasi dan Debarkasi\nBandara Soekarno Hatta\nBP3MI Banten",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 30),
-                        Text(
-                          "${controller.grandTotal.value}".toString(),
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                const TotalLayanan(),
+                if (controller.listArea.isNotEmpty) const Layanan(),
                 const MenuTotal(),
+                const SizedBox(height: 50),
               ],
             ),
           ),
@@ -80,8 +58,8 @@ class DashboardView extends GetView<DashboardController> {
   }
 }
 
-class Header extends GetView<DashboardController> {
-  const Header({
+class TotalLayanan extends GetView<DashboardController> {
+  const TotalLayanan({
     super.key,
   });
 
@@ -90,19 +68,76 @@ class Header extends GetView<DashboardController> {
     return Obx(
       () {
         return Container(
-          margin: const EdgeInsets.only(left: 6, top: 0, right: 6, bottom: 10),
-          child: Column(
+          padding: const EdgeInsets.fromLTRB(8, 0, 8, 12),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Hello, ${AuthService.to.auth.value.nama ?? "User"}",
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Total Pelayanan',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  Text(
+                    "${controller.grandTotal.value}".toString(),
+                    style: const TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  const Text(
+                    "Embarkasi dan Debarkasi\nBandara Soekarno Hatta BP3MI Banten",
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+              PopupMenuButton(
+                itemBuilder: (context) {
+                  return List.generate(
+                    controller.listTahun.length,
+                    (index) {
+                      return PopupMenuItem(
+                        child: Text(
+                          controller.listTahun[index]['tahun'].toString() == ''
+                              ? 'Semua'
+                              : controller.listTahun[index]['tahun'].toString(),
+                          style: TextStyle(
+                            color: controller.tahun.value ==
+                                    controller.listTahun[index]['tahun']
+                                        .toString()
+                                ? Theme.of(context).colorScheme.primary
+                                : null,
+                          ),
+                        ),
+                        onTap: () async {
+                          controller.tahun.value =
+                              controller.listTahun[index]['tahun'].toString();
+                          controller.filter();
+                        },
+                      );
+                    },
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).hoverColor,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Icon(
+                    IconlyLight.filter,
+                    size: 20,
+                  ),
                 ),
               ),
-              const SizedBox(height: 5),
-              const Text("Selamat datang!"),
             ],
           ),
         );
@@ -111,105 +146,45 @@ class Header extends GetView<DashboardController> {
   }
 }
 
-class Overview extends GetView<DashboardController> {
-  const Overview({
+class Layanan extends GetView<DashboardController> {
+  const Layanan({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Text(
-            "Overview",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          PopupMenuButton(
-            itemBuilder: (context) {
-              return List.generate(
-                controller.listTahun.length,
-                (index) {
-                  return PopupMenuItem(
-                    child: Text(
-                      controller.listTahun[index]['tahun'].toString() == ''
-                          ? 'Semua'
-                          : controller.listTahun[index]['tahun'].toString(),
-                      style: TextStyle(
-                        color: controller.tahun.value ==
-                                controller.listTahun[index]['tahun'].toString()
-                            ? Theme.of(context).colorScheme.primary
-                            : null,
-                      ),
-                    ),
-                    onTap: () async {
-                      controller.tahun.value =
-                          controller.listTahun[index]['tahun'].toString();
-                      controller.filter();
-                    },
-                  );
-                },
-              );
-            },
-            child: const Icon(
-              IconlyLight.filter,
-              size: 20,
-            ),
-          ),
-        ],
+    return GridView.builder(
+      padding: const EdgeInsets.only(top: 8),
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 4,
+        childAspectRatio: 1 / 1,
       ),
-    );
-  }
-}
-
-class MenuArea extends GetView<DashboardController> {
-  const MenuArea({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Obx(
-      () {
-        return GridView.builder(
-          padding: const EdgeInsets.only(top: 10),
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4,
-            childAspectRatio: 1 / 1,
-          ),
-          itemCount: controller.listArea.length,
-          itemBuilder: (context, index) {
-            final item = controller.listArea[index];
-            return GestureDetector(
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    radius: 25,
-                    child: item.id == 1
-                        ? const Icon(IconlyLight.discount)
-                        : item.id == 2
-                            ? const Icon(IconlyLight.star)
-                            : item.id == 3
-                                ? const Icon(IconlyLight.ticket_star)
-                                : const Icon(IconlyLight.ticket),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(item.nama ?? ""),
-                ],
+      itemCount: controller.listArea.length,
+      itemBuilder: (context, index) {
+        final item = controller.listArea[index];
+        return GestureDetector(
+          child: Column(
+            children: [
+              CircleAvatar(
+                radius: 25,
+                child: item.id == 1
+                    ? const Icon(IconlyLight.discount)
+                    : item.id == 2
+                        ? const Icon(IconlyLight.star)
+                        : item.id == 3
+                            ? const Icon(IconlyLight.ticket_star)
+                            : const Icon(IconlyLight.ticket),
               ),
-              onTap: () {
-                if (item.layanan != null) {
-                  showLayanan(context, item);
-                }
-              },
-            );
+              const SizedBox(height: 10),
+              Text(item.nama ?? ""),
+            ],
+          ),
+          onTap: () {
+            if (item.layanan != null) {
+              showLayanan(context, item);
+            }
           },
         );
       },
