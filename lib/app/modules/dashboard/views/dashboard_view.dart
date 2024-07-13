@@ -41,6 +41,7 @@ class DashboardView extends GetView<DashboardController> {
               children: [
                 const Header(),
                 if (controller.listArea.isNotEmpty) const MenuArea(),
+                const Overview(),
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(12),
@@ -106,6 +107,62 @@ class Header extends GetView<DashboardController> {
           ),
         );
       },
+    );
+  }
+}
+
+class Overview extends GetView<DashboardController> {
+  const Overview({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(
+            "Overview",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          PopupMenuButton(
+            itemBuilder: (context) {
+              return List.generate(
+                controller.listTahun.length,
+                (index) {
+                  return PopupMenuItem(
+                    child: Text(
+                      controller.listTahun[index]['tahun'].toString() == ''
+                          ? 'Semua'
+                          : controller.listTahun[index]['tahun'].toString(),
+                      style: TextStyle(
+                        color: controller.tahun.value ==
+                                controller.listTahun[index]['tahun'].toString()
+                            ? Theme.of(context).colorScheme.primary
+                            : null,
+                      ),
+                    ),
+                    onTap: () async {
+                      controller.tahun.value =
+                          controller.listTahun[index]['tahun'].toString();
+                      controller.filter();
+                    },
+                  );
+                },
+              );
+            },
+            child: const Icon(
+              IconlyLight.filter,
+              size: 20,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

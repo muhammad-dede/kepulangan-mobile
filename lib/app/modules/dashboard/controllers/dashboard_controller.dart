@@ -24,7 +24,10 @@ class DashboardController extends GetxController {
     {"id": 6, "nama": "Jenazah", "total": 0},
   ].obs;
 
+  RxList<dynamic> listTahun = <dynamic>[].obs;
+
   RxInt grandTotal = 0.obs;
+  RxString tahun = ''.obs;
 
   @override
   void onInit() {
@@ -47,6 +50,10 @@ class DashboardController extends GetxController {
     await getTotalLayanan();
   }
 
+  Future<void> filter() async {
+    await getTotalLayanan();
+  }
+
   Future<void> getArea() async {
     final response = await BaseClient().get("/api/referensi/area");
     response.fold((l) {
@@ -58,25 +65,35 @@ class DashboardController extends GetxController {
   }
 
   Future<void> getTotalLayanan() async {
-    final response = await BaseClient().get("/api/dashboard/total/layanan");
+    final response = await BaseClient()
+        .get("/api/dashboard/total/layanan?tahun=${tahun.value}");
     response.fold((l) {
       listTotalLayanan.value = listTotalLayanan;
+      listTahun.value = listTahun;
     }, (r) {
       List data = r['data'];
       for (var i = 0; i < listTotalLayanan.length; i++) {
         listTotalLayanan[i] = data.firstWhere((item) =>
             item['id'].toString() == listTotalLayanan[i]['id'].toString());
       }
+      // Sum Total Imigran
       grandTotal.value = listTotalLayanan.fold<int>(
           0, (sum, item) => sum + int.parse(item['total'].toString()));
+      // Get Data Tahun
+      listTahun.value = [];
+      listTahun.add({"tahun": ""});
+      List dataTahun = r['list_tahun'];
+      for (var i = 0; i < dataTahun.length; i++) {
+        listTahun.add(dataTahun[i]);
+      }
     });
   }
 
   Future<List<Chart>> getTotalJenisKelamin(int? idLayanan) async {
     try {
       List<Chart> listTotal = [];
-      final response = await BaseClient()
-          .get("/api/dashboard/total/jenis-kelamin/${idLayanan ?? ""}");
+      final response = await BaseClient().get(
+          "/api/dashboard/total/jenis-kelamin?id_layanan=${idLayanan ?? ""}&tahun=${tahun.value}");
       response.fold((l) {
         throw (l.toString());
       }, (r) {
@@ -92,8 +109,8 @@ class DashboardController extends GetxController {
   Future<List<Chart>> getTotalMasalah(int? idLayanan) async {
     try {
       List<Chart> listTotal = [];
-      final response = await BaseClient()
-          .get("/api/dashboard/total/masalah/${idLayanan ?? ""}");
+      final response = await BaseClient().get(
+          "/api/dashboard/total/masalah?id_layanan=${idLayanan ?? ""}&tahun=${tahun.value}");
       response.fold((l) {
         throw (l.toString());
       }, (r) {
@@ -109,8 +126,8 @@ class DashboardController extends GetxController {
   Future<List<Chart>> getTotalNegara(int? idLayanan) async {
     try {
       List<Chart> listTotal = [];
-      final response = await BaseClient()
-          .get("/api/dashboard/total/negara/${idLayanan ?? ""}");
+      final response = await BaseClient().get(
+          "/api/dashboard/total/negara?id_layanan=${idLayanan ?? ""}&tahun=${tahun.value}");
       response.fold((l) {
         throw (l.toString());
       }, (r) {
@@ -126,8 +143,8 @@ class DashboardController extends GetxController {
   Future<List<Chart>> getTotalProvinsi(int? idLayanan) async {
     try {
       List<Chart> listTotal = [];
-      final response = await BaseClient()
-          .get("/api/dashboard/total/provinsi/${idLayanan ?? ""}");
+      final response = await BaseClient().get(
+          "/api/dashboard/total/provinsi?id_layanan=${idLayanan ?? ""}&tahun=${tahun.value}");
       response.fold((l) {
         throw (l.toString());
       }, (r) {
@@ -143,8 +160,8 @@ class DashboardController extends GetxController {
   Future<List<Chart>> getTotalKabKota(int? idLayanan) async {
     try {
       List<Chart> listTotal = [];
-      final response = await BaseClient()
-          .get("/api/dashboard/total/kab-kota/${idLayanan ?? ""}");
+      final response = await BaseClient().get(
+          "/api/dashboard/total/kab-kota?id_layanan=${idLayanan ?? ""}&tahun=${tahun.value}");
       response.fold((l) {
         throw (l.toString());
       }, (r) {
